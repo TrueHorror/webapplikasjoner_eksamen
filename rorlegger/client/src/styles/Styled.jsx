@@ -80,7 +80,7 @@ export const StyledBanner = styled.figure`
 //Main-Content with rom and column. Inspiration from: https://dev.to/drews256/ridiculously-easy-row-and-column-layouts-with-flexbox-1k01 -----------------------------------------------------------------
 export const StyledMainContent = styled.main`
   margin: 0 auto;
-  width: 90%;
+  width: 70%;
  
   
 `;
@@ -173,4 +173,39 @@ export const StyledFooterListItems = styled.li`
 
 `;
 
+export const OfficeCards = styled.div`
+  border: 1px solid black;
+  flex-wrap: wrap;
+  padding: 10px;
+  margin: 5px 5px;
+`;
 
+export const OfficeView = styled.article`
+  text-align: left;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+`;
+
+export const StyledButton = styled.button`
+  color: black;
+  font-size: 1em;
+  margin: 1em;
+  padding: 0.25em 1em;
+  border: 1px solid #469fb9;
+  border-radius: 3px;
+  background: white;
+  &:hover {
+    background: #469fb9;
+    color: white;
+    cursor: pointer;
+  }
+  
+  margin: 10px auto;
+`;
+
+export const StyledFilterButton = styled(StyledButton)`
+background-color:  #DBDBDB;
+border: none;
+border-radius: 0px;
+`;
