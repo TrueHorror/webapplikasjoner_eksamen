@@ -1,9 +1,9 @@
 
-var ArticleService = require('../services/article.service')
+const ArticleService = require('../services/article.service')
 
 exports.createArticle = async function (req, res, next) {
   try {
-    await ArticleService.createArticle(req.body)
+    await ArticleService.createArticle(req)
     return res.status(201).json({message: "Successfully created an article"});
   } catch (e) {
     console.error(e)
