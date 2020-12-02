@@ -1,5 +1,6 @@
 var User = require('../models/user.model.js')
 const bcrypt = require('bcrypt')
+const nJwt = require('njwt')
 const saltRounds = 10;
 
 exports.createUser = async function (data) {
@@ -23,16 +24,13 @@ exports.createUser = async function (data) {
   }
 }
 
+
 exports.loginUser = async function (data) {
   try {
     let dataFromDb = await User.findOne({Email: data.Email})
     if (await bcrypt.compare(data.Password, dataFromDb.Password)){
-      return {
-        GivenName: dataFromDb.GivenName,
-        FamilyName: dataFromDb.FamilyName,
-        Email: dataFromDb.Email,
-        UserType: dataFromDb.UserType
-      }
+
+      return createToken(dataFromDb)
     } else {
       return null
     }
@@ -40,6 +38,19 @@ exports.loginUser = async function (data) {
     console.error(e)
     throw Error('Login failed')
   }
+}
+
+createToken = function (data){
+  let claims = {
+    sub: data._id,
+    givenName: data.GivenName,
+    familyName: data.FamilyName,
+    email: data.Email,
+    userType: data.UserType
+  }
+  let token = nJwt.create(claims,process.env.JWT_SECRET);
+  token.setExpiration(new Date().getTime() + 60*60*1000)
+  return token.compact()
 }
 
 exports.getUserType = function (userType){

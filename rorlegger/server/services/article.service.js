@@ -14,16 +14,22 @@ exports.getArticles = async function (){
 
 
 exports.createArticle = async function (data) {
+  let body = data.body
   try {
-    if (WriterService.writerExists(data.Writer.GivenName, data.Writer.FamilyName)){
+    //TODO Test this (admin access only)
+    if (data.user.userType !== 0){
+      throw 'Only admins can create articles'
+    }
+    if (WriterService.writerExists(body.Writer.GivenName, body.Writer.FamilyName)){
       return await Article.create({
-        Title: data.Title,
-        Content: data.Content,
-        Category: data.Category,
+        Title: body.Title,
+        Content: body.Content,
+        Category: body.Category,
         Writer: {
-          GivenName: data.Writer.GivenName,
-          FamilyName: data.Writer.FamilyName
+          GivenName: body.Writer.GivenName,
+          FamilyName: body.Writer.FamilyName
         },
+        User: data.user.sub
       })
     } else {
       throw Error('Writer not found')

@@ -14,7 +14,7 @@ exports.loginUser = async function (req, res, next) {
   try {
     let userData = await UserService.loginUser(req.body)
     if (userData){
-      return res.status(200).json({UserData: userData, message: "User logged in"})
+      return res.status(200).json({Token: userData, message: "User logged in"})
     } else {
       return res.status(401).json({message: "Wrong email/password"})
     }
