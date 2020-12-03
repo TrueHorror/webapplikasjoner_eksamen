@@ -233,3 +233,46 @@ export const StyledMaterialIcon = styled.i`
     color: #469fb9;
   }
 `;
+
+// Loginpage
+
+export const StyledLogin = styled.div`
+  margin: 100px;
+  label {
+    width: 200px;
+  }
+`;
+
+export const StyledLabel = styled.label``;
+
+export const StyledInput = styled.input`
+  border: 1px solid #469fb9;
+  border-radius: 3px;
+`;
+
+export const StyledInputWrapper = styled.div`
+  ${StyledLabel}
+`;
+
+// Articles
+
+export const StyledButtonGroupArticles = styled.div`
+  display: flex;
+    justify-content: space-between;
+`;
+
+export const StyledArticleListItem = styled.div`
+  display: flex;
+`;
+
+export const StyledArticleListItemImage = styled.div`
+  background-color: gray;
+  width: 20rem;
+  height: 12rem;
+  margin: 20px;
+`;
+
+export const StyledArticleListItemContent = styled.div`
+width: 70%;
+text-align: left;
+`;
