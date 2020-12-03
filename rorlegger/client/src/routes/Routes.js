@@ -3,6 +3,7 @@ import Home from '../pages/Home';
 import Offices from '../pages/Offices';
 import Articles from '../pages/Articles';
 import Contact from '../pages/Contact';
+import OfficesDetails from '../pages/OfficesDetails';
 
 function Routes() {
   return (
@@ -12,6 +13,9 @@ function Routes() {
       </Route>
       <Route path="/offices">
         <Offices />
+      </Route>
+      <Route path="/details">
+        <OfficesDetails />
       </Route>
       <Route path="/articles">
         <Articles />
