@@ -214,6 +214,23 @@ export const StyledButton = styled.button`
   margin: 10px auto;
 `;
 
+export const StyledDetailsButton = styled(Link)`
+  color: black;
+  font-size: 1em;
+  margin: 10px;
+  text-decoration: none;
+  border: 1px solid #469fb9;
+  border-radius: 3px;
+  background: white;
+  &:hover {
+    background: #469fb9;
+    color: white;
+    cursor: pointer;
+  }
+
+  margin: 10px auto;
+`;
+
 export const StyledFilterOptions = styled.div`
   float: right;
 `;
