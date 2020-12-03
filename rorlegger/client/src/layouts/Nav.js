@@ -1,20 +1,20 @@
+/* eslint-disable import/no-cycle */
 import { NavLink } from 'react-router-dom';
-import React from 'react'
+import React from 'react';
 import { StyledNav, NavMenu, NavMenuItem } from '../styles/Styled.jsx';
-import {userIsLoggedIn} from "../utils/authentication";
+import { userIsLoggedIn } from '../utils/authentication';
 
 function Nav() {
-
   const LoginLink = () => {
-    if (!userIsLoggedIn()){
+    if (!userIsLoggedIn()) {
       return (
         <NavLink exact to="/login">
           Logg inn
         </NavLink>
-      )
+      );
     }
-    return null
-  }
+    return null;
+  };
 
   return (
     <StyledNav>
@@ -32,7 +32,7 @@ function Nav() {
           <NavLink exact to="/contact">
             Kontakt
           </NavLink>
-          <LoginLink/>
+          <LoginLink />
         </NavMenuItem>
       </NavMenu>
     </StyledNav>

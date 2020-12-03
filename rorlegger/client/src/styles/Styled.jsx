@@ -197,6 +197,11 @@ export const OfficeView = styled.article`
   flex-direction: row;
 `;
 
+export const StyledDetailedOfficeView = styled(OfficeView)`
+  flex-direction: column;
+  margin-bottom: 20px;
+`;
+
 export const StyledButton = styled.button`
   color: black;
   font-size: 1em;
@@ -251,6 +256,13 @@ export const StyledMaterialIcon = styled.i`
   }
 `;
 
+export const WorkerCardsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+`;
+
 // Loginpage
 
 export const StyledLogin = styled.div`
@@ -275,7 +287,7 @@ export const StyledInputWrapper = styled.div`
 
 export const StyledButtonGroupArticles = styled.div`
   display: flex;
-    justify-content: space-between;
+  justify-content: space-between;
 `;
 
 export const StyledArticleListItem = styled.div`
@@ -290,6 +302,6 @@ export const StyledArticleListItemImage = styled.div`
 `;
 
 export const StyledArticleListItemContent = styled.div`
-width: 70%;
-text-align: left;
+  width: 70%;
+  text-align: left;
 `;
