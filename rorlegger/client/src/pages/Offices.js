@@ -1,4 +1,7 @@
+/* eslint-disable react/button-has-type */
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
+import Icon from '@material-ui/core/Icon';
 import {
   StyledMainContent,
   OfficeView,
@@ -31,8 +34,8 @@ function Offices() {
       <StyledMainContent>
         <div>
           <StyledFilterButton>filter</StyledFilterButton>
-          <i className="material-icons">view_module</i>
-          <button>list</button>
+          <Icon>view_module</Icon>
+          <Icon>view_list</Icon>
           {cities.map((c) => (
             <OfficeView key={c.city}>
               <h2>{`${c.city} (${c.number} kontorer)`}</h2>
