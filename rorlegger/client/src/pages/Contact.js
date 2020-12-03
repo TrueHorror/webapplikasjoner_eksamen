@@ -1,7 +1,5 @@
-function Contact(){
-  return(
-    <p>Contact</p>
-  )
+function Contact() {
+  return <p>Contact</p>;
 }
 
-export default Contact
+export default Contact;
