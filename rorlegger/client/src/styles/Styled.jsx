@@ -1,38 +1,31 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
+// Style and CSS taken from lectures and earlier mandatory exercises
 
-//Style and CSS taken from lectures and earlier mandatory exercises
-
-//header
+// header
 export const StyledHeader = styled.header`
-width: 100%;
-box-shadow: 0px 5px 5px -5px #00000029;
-display: flex;
-
-
+  width: 100%;
+  box-shadow: 0px 5px 5px -5px #00000029;
+  display: flex;
 `;
 
-//Styled Logo
+// Styled Logo
 
 export const StyledLogo = styled.h1`
-padding-left: 20px;
-
+  padding-left: 20px;
 `;
 
-//Nav in header
+// Nav in header
 export const StyledNav = styled.nav`
- margin-left: auto;
- margin-right: 0;
-
-
+  margin-left: auto;
+  margin-right: 0;
 `;
 
 export const NavMenu = styled.ul`
   list-style-type: none;
   padding: 0;
   display: flex;
-  
 `;
 
 export const NavMenuItem = styled.li`
@@ -51,7 +44,6 @@ export const NavMenuItem = styled.li`
     line-height: 3.456;
     padding: 5px 10px;
     text-decoration: none;
-    
 
     &.active {
       color: #469fb9;
@@ -61,28 +53,23 @@ export const NavMenuItem = styled.li`
       border-bottom: 4px solid #469fb9;
     }
   }
-
 `;
 
-//Banner, Logo
+// Banner, Logo
 export const StyledBanner = styled.figure`
   width: 100%;
   margin: 0 auto;
-  background-color: #DBDBDB;
+  background-color: #dbdbdb;
   height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-
-
-//Main-Content with rom and column. Inspiration from: https://dev.to/drews256/ridiculously-easy-row-and-column-layouts-with-flexbox-1k01 -----------------------------------------------------------------
+// Main-Content with rom and column. Inspiration from: https://dev.to/drews256/ridiculously-easy-row-and-column-layouts-with-flexbox-1k01 -----------------------------------------------------------------
 export const StyledMainContent = styled.main`
   margin: 0 auto;
   width: 70%;
- 
-  
 `;
 
 export const Row = styled.div`
@@ -90,8 +77,6 @@ export const Row = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
-  
-
 `;
 
 export const Column = styled.div`
@@ -100,8 +85,6 @@ export const Column = styled.div`
   flex-basis: 100%;
   flex: 1;
   padding: 10px;
-
- 
 `;
 
 export const DoubleColumn = styled.div`
@@ -112,57 +95,53 @@ export const DoubleColumn = styled.div`
   padding: 10px;
 `;
 
-
-
 export const StyledMainSections = styled.section`
-  background-color: #DBDBDB;
+  background-color: #dbdbdb;
   height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
-
 `;
 
+export const StyledOfficesList = styled.ol``;
 
+export const StyledListItems = styled.li``;
 
-//Aside
+// Aside
 export const StyledAside = styled.aside`
-  background-color: #DBDBDB;
+  background-color: #dbdbdb;
   height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-//Main Links
+// Main Links
 
 export const StyledLinks = styled(Link)`
   font-size: 20px;
   text-decoration: none;
   color: #000;
   &:hover {
-      border-bottom: 4px solid #469fb9;
-    }
-
+    border-bottom: 4px solid #469fb9;
+  }
 `;
 
 //------------------------------------------------------------------------------------------
 
-//footer
+// footer
 
 export const StyledFooter = styled.footer`
   width: 100%;
   display: flex;
   box-shadow: 0 -5px 5px -5px #00000029;
   height: 30px;
-
 `;
 
 export const StyledFooterList = styled.ul`
   list-style-type: none;
   margin: 0 auto;
   padding: 0;
-  
 `;
 
 export const StyledFooterListItems = styled.li`
@@ -170,7 +149,6 @@ export const StyledFooterListItems = styled.li`
   display: block;
   float: left;
   justify-content: space-between;
-
 `;
 
 export const OfficeCards = styled.div`
@@ -200,12 +178,12 @@ export const StyledButton = styled.button`
     color: white;
     cursor: pointer;
   }
-  
+
   margin: 10px auto;
 `;
 
 export const StyledFilterButton = styled(StyledButton)`
-background-color:  #DBDBDB;
-border: none;
-border-radius: 0px;
+  background-color: #dbdbdb;
+  border: none;
+  border-radius: 0px;
 `;
