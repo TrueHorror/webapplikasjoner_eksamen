@@ -8,3 +8,15 @@ describe("getUserType()", () => {
     expect(UserService.getUserType('fakeAdmin')).toBeUndefined()
   });
 });
+
+describe("loginUser()", async () => {
+  it ("should login admin and return a token", async () => {
+    let loginDetails = {
+      Email: "admin@admin.no",
+      Password: "drossap"
+    }
+    import
+
+    expect(await UserService.loginUser(loginDetails)).toBe('hei')
+  })
+})
