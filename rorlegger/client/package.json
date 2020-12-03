@@ -28,12 +28,7 @@
     "eslint-config-prettier": "^6.14.0",
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-prettier": "^3.1.4",
-<<<<<<< HEAD
-    "eslint-plugin-react": "^7.21.5",
-    "eslint-plugin-react-hooks": "^4.2.0",
     "history": "^5.0.0",
-=======
->>>>>>> ad1765b2b75122c556387e18a5703425bc00e3eb
     "material-design-icons": "^3.0.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
