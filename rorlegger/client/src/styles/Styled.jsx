@@ -8,30 +8,47 @@ export const StyledHeader = styled.header`
   width: 100%;
   box-shadow: 0px 5px 5px -5px #00000029;
   display: flex;
+  flex-wrap: wrap;
+  @media only screen and (max-width: 510px) {
+    flex-direction: column;
+  }
 `;
 
 // Styled Logo
 
 export const StyledLogo = styled.h1`
   padding-left: 20px;
+  @media only screen and (max-width: 600px) {
+    padding: 0;
+    margin: 0 auto;
+  }
 `;
 
 // Nav in header
 export const StyledNav = styled.nav`
   margin-left: auto;
   margin-right: 0;
+
+  @media only screen and (max-width: 800px) {
+    margin: 0 auto;
+  }
 `;
 
 export const NavMenu = styled.ul`
   list-style-type: none;
   padding: 0;
-  display: flex;
 `;
 
 export const NavMenuItem = styled.li`
   padding: 0 20px;
   display: block;
   float: left;
+  display: flex;
+  flex-direction: row;
+  @media only screen and (max-width: 510px) {
+    padding: 0;
+    flex-direction: column;
+  }
 
   &:first-child {
     padding-left: 0;
@@ -52,6 +69,9 @@ export const NavMenuItem = styled.li`
     &:hover {
       border-bottom: 4px solid #469fb9;
     }
+  }
+  @media only screen and (max-width: 600px) {
+    font-size: 50px;
   }
 `;
 
@@ -105,7 +125,19 @@ export const StyledMainSections = styled.section`
 
 export const StyledOfficesList = styled.ol``;
 
-export const StyledListItems = styled.li``;
+export const StyledListItems = styled.li`
+  display: flex;
+  flex-direction: row;
+`;
+
+export const StyledListHeader = styled.h3`
+  top: 0;
+`;
+
+export const StyledListText = styled.p`
+  margin-left: 10px;
+  top: 0;
+`;
 
 // Aside
 export const StyledAside = styled.aside`
@@ -168,8 +200,8 @@ export const OfficeView = styled.article`
 export const StyledButton = styled.button`
   color: black;
   font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
+  margin: 10px;
+
   border: 1px solid #469fb9;
   border-radius: 3px;
   background: white;
@@ -182,8 +214,22 @@ export const StyledButton = styled.button`
   margin: 10px auto;
 `;
 
+export const StyledFilterOptions = styled.div`
+  float: right;
+`;
+
 export const StyledFilterButton = styled(StyledButton)`
   background-color: #dbdbdb;
   border: none;
   border-radius: 0px;
+`;
+
+export const StyledMaterialIcon = styled.i`
+  margin: 5px;
+  color: ${(props) => (props.primary ? '#469fb9' : 'black')};
+
+  &:hover {
+    cursor: pointer;
+    color: #469fb9;
+  }
 `;
