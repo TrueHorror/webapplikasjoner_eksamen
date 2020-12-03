@@ -11,6 +11,15 @@ exports.createArticle = async function (req, res, next) {
   }
 }
 
+exports.getArticles = async function (req, res, next) {
+  try {
+    let articles = await ArticleService.getArticles()
+    return res.status(200).json({message: "Successfully retrieved articles", articles})
+  } catch (e) {
+    return res.status(400).json({message: e.message})
+  }
+}
+
 
 
 /*

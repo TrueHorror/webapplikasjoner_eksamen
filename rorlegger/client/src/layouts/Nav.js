@@ -1,7 +1,21 @@
 import { NavLink } from 'react-router-dom';
+import React from 'react'
 import { StyledNav, NavMenu, NavMenuItem } from '../styles/Styled.jsx';
+import {userIsLoggedIn} from "../utils/authentication";
 
 function Nav() {
+
+  const LoginLink = () => {
+    if (!userIsLoggedIn()){
+      return (
+        <NavLink exact to="/login">
+          Logg inn
+        </NavLink>
+      )
+    }
+    return null
+  }
+
   return (
     <StyledNav>
       <NavMenu>
@@ -18,9 +32,7 @@ function Nav() {
           <NavLink exact to="/contact">
             Kontakt
           </NavLink>
-          <NavLink exact to="/login">
-            Log in
-          </NavLink>
+          <LoginLink/>
         </NavMenuItem>
       </NavMenu>
     </StyledNav>
