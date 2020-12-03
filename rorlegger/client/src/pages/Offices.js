@@ -18,6 +18,7 @@ import {
   StyledMaterialIcon,
   StyledListHeader,
   StyledListText,
+  StyledDetailsButton,
 } from '../styles/Styled.jsx';
 import data from './tempOffices.json';
 
@@ -86,12 +87,9 @@ function Offices() {
                     <p>{off.adress}</p>
                     <p>{off.phone}</p>
                     <p>{off.email}</p>
-                    <StyledButton
-                      name={off.name}
-                      onClick={redirectToDetailedPage}
-                    >
+                    <StyledDetailsButton name={off.name} to="/details/">
                       Detaljer
-                    </StyledButton>
+                    </StyledDetailsButton>
                   </OfficeCards>
                 ))
               ) : (
@@ -102,12 +100,9 @@ function Offices() {
                       <StyledListText>{off.adress}</StyledListText>
                       <StyledListText>{off.phone}</StyledListText>
                       <StyledListText>{off.email}</StyledListText>
-                      <StyledButton
-                        name={off.name}
-                        onClick={redirectToDetailedPage}
-                      >
+                      <StyledDetailsButton name={off.name}>
                         Detaljer
-                      </StyledButton>
+                      </StyledDetailsButton>
                     </StyledListItems>
                   ))}
                 </StyledOfficesList>

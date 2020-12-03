@@ -1,4 +1,5 @@
 import { Switch, Route } from 'react-router-dom';
+
 import Home from '../pages/Home';
 import Offices from '../pages/Offices';
 import Articles from '../pages/Articles';
@@ -14,7 +15,7 @@ function Routes() {
       <Route path="/offices">
         <Offices />
       </Route>
-      <Route path="/details">
+      <Route path="/offices/:id">
         <OfficesDetails />
       </Route>
       <Route path="/articles">
