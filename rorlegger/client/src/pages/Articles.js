@@ -1,7 +1,5 @@
-function Articles(){
-  return(
-    <p>articles</p>
-  )
+function Articles() {
+  return <p>articles</p>;
 }
 
-export default Articles
+export default Articles;
