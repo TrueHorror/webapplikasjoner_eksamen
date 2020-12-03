@@ -9,6 +9,9 @@
   },
   "author": "Trond and Fredrik",
   "license": "ISC",
+  "jest": {
+    "testEnvironment": "node"
+  },
   "dependencies": {
     "@types/jest": "^26.0.15",
     "bcrypt": "^5.0.0",
