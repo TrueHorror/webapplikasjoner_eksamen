@@ -19,3 +19,11 @@ exports.createCategory = async function (data) {
     throw Error('Could not create a category')
   }
 }
+
+exports.getCategory = async function (id) {
+  try {
+    return await Category.findOne({_id: id})
+  } catch (e) {
+    throw Error('Could not find category')
+  }
+}

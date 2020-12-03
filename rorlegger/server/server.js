@@ -24,8 +24,9 @@ function createServer(){
     optionsSuccessStatus: 200
   }))
 
-  app.use(jwt({secret, algorithms: ['HS256'] }).unless({path: ['/user']}));
+  app.use(jwt({secret, algorithms: ['HS256'] }).unless({path: ['/user', '/articles']}));
 
+  app.use('/articles', require('./routes/articles.route.js'))
   app.use('/article', require('./routes/article.route.js'))
   app.use('/writers', require('./routes/writer.route.js'))
   app.use('/category', require('./routes/category.route'))

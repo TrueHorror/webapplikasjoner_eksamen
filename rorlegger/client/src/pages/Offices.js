@@ -115,4 +115,4 @@ function Offices() {
   );
 }
 
-export default Offices;
+export default Offices
