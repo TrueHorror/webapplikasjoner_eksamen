@@ -6,6 +6,7 @@ import Contact from '../pages/Contact';
 import OfficesDetails from '../pages/OfficesDetails';
 import Login from '../pages/Login';
 import CreateArticle from '../pages/CreateArticle';
+import ArticleDetails from '../pages/ArticleDetails';
 
 function Routes() {
   return (
@@ -21,6 +22,9 @@ function Routes() {
       </Route>
       <Route path="/articles">
         <Articles />
+      </Route>
+      <Route path="/article/:id">
+        <ArticleDetails />
       </Route>
       <Route path="/contact">
         <Contact />
