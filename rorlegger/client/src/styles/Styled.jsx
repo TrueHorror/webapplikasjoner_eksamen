@@ -295,6 +295,7 @@ export const StyledButtonGroupArticles = styled.div`
 
 export const StyledArticleListItem = styled.div`
   display: flex;
+  max-height: 232px;
 `;
 
 export const StyledArticleListItemImage = styled.div`
