@@ -18,7 +18,7 @@ export async function getArticlesRequest() {
 }
 
 export async function createArticleRequest(dataBody) {
-  return Axios.post(`${url}/articles`, dataBody, {
+  return Axios.post(`${url}/article`, dataBody, {
     headers: { Authorization: `Bearer ${getToken()}` },
   });
 }
