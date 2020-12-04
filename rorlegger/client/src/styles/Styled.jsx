@@ -197,11 +197,33 @@ export const OfficeView = styled.article`
   flex-direction: row;
 `;
 
+export const StyledDetailedOfficeView = styled(OfficeView)`
+  flex-direction: column;
+  margin-bottom: 20px;
+`;
+
 export const StyledButton = styled.button`
   color: black;
   font-size: 1em;
   margin: 10px;
 
+  border: 1px solid #469fb9;
+  border-radius: 3px;
+  background: white;
+  &:hover {
+    background: #469fb9;
+    color: white;
+    cursor: pointer;
+  }
+
+  margin: 10px auto;
+`;
+
+export const StyledDetailsButton = styled(Link)`
+  color: black;
+  font-size: 1em;
+  margin: 10px;
+  text-decoration: none;
   border: 1px solid #469fb9;
   border-radius: 3px;
   background: white;
@@ -232,6 +254,13 @@ export const StyledMaterialIcon = styled.i`
     cursor: pointer;
     color: #469fb9;
   }
+`;
+
+export const WorkerCardsContainer = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
 `;
 
 // Loginpage

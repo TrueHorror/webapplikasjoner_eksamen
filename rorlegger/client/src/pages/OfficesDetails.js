@@ -1,12 +1,15 @@
+/* eslint-disable eqeqeq */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable react/button-has-type */
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import IconButton from '@material-ui/core/IconButton';
-import ViewModuleIcon from '@material-ui/icons/ViewModule';
-import ViewListIcon from '@material-ui/icons/ViewList';
+import { useParams } from 'react-router-dom';
+
 import {
   StyledMainContent,
-  OfficeView,
+  StyledDetailedOfficeView,
+  WorkerCardsContainer,
   OfficeCards,
   StyledButton,
   Row,
@@ -18,15 +21,64 @@ import {
   StyledMaterialIcon,
   StyledListHeader,
   StyledListText,
+  StyledMainSections,
 } from '../styles/Styled.jsx';
+import data from '../tempOffices.json';
 
 function OfficesDetails() {
+  const { id } = useParams();
+  console.log(id);
+
+  const [dataFromJson, setDataFromJson] = useState(data);
+
+  const [currentOffice, setCurrentOffice] = useState();
+
+  const updateData = (paramData) => {
+    // setCurrentOffice(paramData);
+  };
+
+  let officeData;
+
+  for (let i = 0; i < dataFromJson.length; i++) {
+    for (let j = 0; j < dataFromJson[i].offices.length; j++) {
+      if (dataFromJson[i].offices[j].id == id) {
+        officeData = dataFromJson[i].offices[j];
+        break;
+      }
+    }
+  }
+  updateData(officeData);
+
   return (
     <>
       <StyledBanner>
-        <h1>Våre kontorer</h1>
+        <h1>hei</h1>
       </StyledBanner>
-      <StyledMainContent />
+      <StyledMainContent>
+        <StyledDetailedOfficeView>
+          <h2>Velkommen til {/* currentOffice.name */}</h2>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed do
+            eiusmod tempor incididunt ut labore et dolore magna. Lorem ipsum
+            dolor sit amet, consectetur.
+          </p>
+        </StyledDetailedOfficeView>
+        <StyledDetailedOfficeView>
+          <h2>Våre ansatte</h2>
+          <WorkerCardsContainer>
+            {officeData.workers.map((worker) => (
+              <OfficeCards>
+                <figure />
+                <p>{worker.workerName}</p>
+                <p>{worker.possition}</p>
+              </OfficeCards>
+            ))}
+          </WorkerCardsContainer>
+        </StyledDetailedOfficeView>
+        <StyledMainSections>
+          <h1>Kontakt oss på {/* currentOffice.phone */}</h1>
+        </StyledMainSections>
+      </StyledMainContent>
     </>
   );
 }

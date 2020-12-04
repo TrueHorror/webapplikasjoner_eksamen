@@ -14,7 +14,7 @@ function Routes() {
       <Route path="/offices">
         <Offices />
       </Route>
-      <Route path="/details">
+      <Route path="/office/:id">
         <OfficesDetails />
       </Route>
       <Route path="/articles">

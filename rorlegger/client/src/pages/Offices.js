@@ -18,15 +18,14 @@ import {
   StyledMaterialIcon,
   StyledListHeader,
   StyledListText,
+  StyledDetailsButton,
 } from '../styles/Styled.jsx';
-import data from './tempOffices.json';
+import data from '../tempOffices.json';
 
 function Offices() {
   const [cities, setCities] = useState(data);
 
   const [cardView, setCardView] = useState(true);
-
-  // TODO: Få til funksjonalitet, ikoner for ListView og cardView, Sette opp ListView
 
   const redirectToDetailedPage = (e) => {
     console.log(e.target.name);
@@ -86,12 +85,12 @@ function Offices() {
                     <p>{off.adress}</p>
                     <p>{off.phone}</p>
                     <p>{off.email}</p>
-                    <StyledButton
+                    <StyledDetailsButton
                       name={off.name}
-                      onClick={redirectToDetailedPage}
+                      to={`/office/${off.id}`}
                     >
                       Detaljer
-                    </StyledButton>
+                    </StyledDetailsButton>
                   </OfficeCards>
                 ))
               ) : (
@@ -102,12 +101,9 @@ function Offices() {
                       <StyledListText>{off.adress}</StyledListText>
                       <StyledListText>{off.phone}</StyledListText>
                       <StyledListText>{off.email}</StyledListText>
-                      <StyledButton
-                        name={off.name}
-                        onClick={redirectToDetailedPage}
-                      >
+                      <StyledDetailsButton name={off.name}>
                         Detaljer
-                      </StyledButton>
+                      </StyledDetailsButton>
                     </StyledListItems>
                   ))}
                 </StyledOfficesList>
