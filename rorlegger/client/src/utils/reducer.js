@@ -7,21 +7,11 @@ const theStore = (
 ) => {
   switch (action.type) {
     case 'USER_LOGGED_IN':
-      return {
-        loggedInUser: action.data,
-      };
+      return { ...state, loggedInUser: action.data };
     case 'USER_LOGOUT':
-      return {
-        loggedInUser: '',
-      };
-    case 'REMOVE_USER_DATA':
-      return {
-        loggedInUser: '',
-      };
+      return { ...state, loggedInUser: '' };
     case 'SAVE_ARTICLES_IN_STORE':
-      return {
-        articles: action.articles,
-      };
+      return { ...state, articles: action.articles };
     default:
       return state;
   }
