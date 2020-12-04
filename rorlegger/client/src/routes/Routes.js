@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Switch, Route } from 'react-router-dom';
 import Home from '../pages/Home';
 import Offices from '../pages/Offices';
@@ -8,7 +9,7 @@ import Login from '../pages/Login';
 import CreateArticle from '../pages/CreateArticle';
 import ArticleDetails from '../pages/ArticleDetails';
 
-function Routes() {
+function Routes({ handleOverlay }) {
   return (
     <Switch>
       <Route exact path="/">
@@ -33,7 +34,7 @@ function Routes() {
         <Login />
       </Route>
       <Route path="/createarticle">
-        <CreateArticle />
+        <CreateArticle handleOverlay={handleOverlay} />
       </Route>
     </Switch>
   );
