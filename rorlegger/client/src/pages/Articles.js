@@ -22,6 +22,7 @@ import { getArticlesRequest } from '../utils/apiCalls';
 function Articles() {
   const articles = useSelector((state) => state.articles);
   const [filteredArticles, setFilteredArticles] = useState([]);
+  // const [categories, setCategories] = useState([]);
   const [searchString, setSearchString] = useState('');
   const dispatch = useDispatch();
 
@@ -81,9 +82,9 @@ function Articles() {
   };
 
   // eslint-disable-next-line no-undef
-  const FilterOnCategory = categories.map((category) => (
+  /* const FilterOnCategory = categories.map((category) => (
     <option value={category._id}>{category.Name}</option>
-  ));
+  )); */
 
   return (
     <section>
@@ -103,9 +104,6 @@ function Articles() {
               type="text"
               style={{ marginRight: '10px' }}
             />
-            <select>
-              <FilterOnCategory />
-            </select>
           </div>
         </StyledButtonGroupArticles>
         <div>{articlesList}</div>
