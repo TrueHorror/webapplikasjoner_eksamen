@@ -1,44 +1,52 @@
-import {StyledBanner,
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import {
+  StyledBanner,
   StyledFilterButton,
   StyledMainContent,
   StyledButtonGroupArticles,
   StyledArticleListItem,
   StyledArticleListItemImage,
-  StyledArticleListItemContent
-} from "../styles/Styled";
-import React, { useState, useEffect } from "react";
-import {userIsLoggedInAsAdmin} from "../utils/authentication";
-import {getArticlesRequest} from "../utils/apiCalls";
-import { Link } from 'react-router-dom'
+  StyledArticleListItemContent,
+} from '../styles/Styled';
+import { userIsLoggedInAsAdmin } from '../utils/authentication';
+import { getArticlesRequest } from '../utils/apiCalls';
 
 function Articles() {
-
-  const [articles, setArticles] = useState([])
+  const [articles, setArticles] = useState([]);
 
   useEffect(() => {
     getArticlesRequest()
-      .then(res => setArticles(res.data.articles))
-      .catch(e => {console.log(e); console.error('Noe gikk galt')})
-  },[])
+      .then((res) => setArticles(res.data.articles))
+      .catch((e) => {
+        console.log(e);
+        console.error('Noe gikk galt');
+      });
+  }, []);
 
-  const articlesList = articles.map((article) =>
+  const articlesList = articles.map((article) => (
     <StyledArticleListItem>
-      <StyledArticleListItemImage></StyledArticleListItemImage>
+      <StyledArticleListItemImage />
       <StyledArticleListItemContent>
-        <div><Link to={{ pathname: `/article/${article._id}` }} style={{fontSize: "50px", textDecoration: "none", color: "black" }}>{article.Title}</Link></div>
+        <div>
+          <Link
+            to={{ pathname: `/article/${article._id}` }}
+            style={{ fontSize: '50px', textDecoration: 'none', color: 'black' }}
+          >
+            {article.Title}
+          </Link>
+        </div>
         <div>{article.Content}</div>
       </StyledArticleListItemContent>
-
     </StyledArticleListItem>
-  )
+  ));
 
   const NewArticleButton = () => {
-    if (userIsLoggedInAsAdmin()){
-      return <StyledFilterButton>NY ARTIKKEL</StyledFilterButton>
-    } else {
-      return null
+    if (userIsLoggedInAsAdmin()) {
+      return <StyledFilterButton>NY ARTIKKEL</StyledFilterButton>;
     }
-  }
+    return null;
+  };
 
   return (
     <section>
@@ -48,19 +56,19 @@ function Articles() {
       <StyledMainContent>
         <StyledButtonGroupArticles>
           <div>
-            <NewArticleButton/>
+            <NewArticleButton />
           </div>
           <div>
-            <StyledFilterButton style={{marginRight: "10px"}}>SØK</StyledFilterButton>
+            <StyledFilterButton style={{ marginRight: '10px' }}>
+              SØK
+            </StyledFilterButton>
             <StyledFilterButton>FILTER</StyledFilterButton>
           </div>
         </StyledButtonGroupArticles>
-        <div>
-          {articlesList}
-        </div>
+        <div>{articlesList}</div>
       </StyledMainContent>
     </section>
-  )
+  );
 }
 
 export default Articles;

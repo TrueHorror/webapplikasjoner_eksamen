@@ -1,24 +1,19 @@
+import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-} from "react-router-dom";
-import theStore from './utils/store'
-import { createStore} from "redux";
+import { BrowserRouter as Router } from 'react-router-dom';
+import theStore from './utils/store';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {Provider} from "react-redux";
-import {checkTokenInStorage} from "./utils/authentication";
+import { checkTokenInStorage } from './utils/authentication';
 
-export const store = createStore(theStore)
-
-checkTokenInStorage()
+checkTokenInStorage();
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <Provider store={store}>
+      <Provider store={theStore}>
         <App />
       </Provider>
     </Router>
