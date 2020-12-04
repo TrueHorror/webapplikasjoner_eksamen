@@ -258,11 +258,12 @@ export const StyledInputWrapper = styled.div`
 
 export const StyledButtonGroupArticles = styled.div`
   display: flex;
-    justify-content: space-between;
+  justify-content: space-between;
 `;
 
 export const StyledArticleListItem = styled.div`
   display: flex;
+  max-height: 232px;
 `;
 
 export const StyledArticleListItemImage = styled.div`
@@ -273,6 +274,6 @@ export const StyledArticleListItemImage = styled.div`
 `;
 
 export const StyledArticleListItemContent = styled.div`
-width: 70%;
-text-align: left;
+  width: 70%;
+  text-align: left;
 `;
