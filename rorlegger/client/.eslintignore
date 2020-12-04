@@ -4,3 +4,4 @@ dist
 *.lock
 Dockerfile
 .next
+src/components/GuardedRoute.js

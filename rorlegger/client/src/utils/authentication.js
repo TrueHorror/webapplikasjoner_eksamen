@@ -1,9 +1,8 @@
-/* eslint-disable import/no-cycle */
 import jwtDecode from 'jwt-decode';
-import { store } from '../index';
+import Store from './store';
 
 export function userIsLoggedIn() {
-  let userData = store.getState();
+  let userData = Store.getState();
   userData = userData.loggedInUser;
   const now = Date.now();
   const expires = userData.expires * 1000;
@@ -16,7 +15,7 @@ export function userIsLoggedIn() {
 export function userIsLoggedInAsAdmin() {
   let userData;
   if (userIsLoggedIn()) {
-    userData = store.getState();
+    userData = Store.getState();
     if (userData.loggedInUser.userType === 0) {
       return true;
     }
@@ -28,7 +27,7 @@ export function setToken(token) {
   sessionStorage.setItem('token', token);
   const decoded = jwtDecode(token);
   console.log(decoded);
-  store.dispatch({
+  Store.dispatch({
     type: 'USER_LOGGED_IN',
     data: {
       email: decoded.email,

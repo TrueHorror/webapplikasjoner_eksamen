@@ -1,6 +1,4 @@
-/* eslint-disable import/no-cycle */
 import { Switch, Route } from 'react-router-dom';
-
 import Home from '../pages/Home';
 import Offices from '../pages/Offices';
 import Articles from '../pages/Articles';
