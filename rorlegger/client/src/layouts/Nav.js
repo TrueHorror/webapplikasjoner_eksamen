@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import { NavLink } from 'react-router-dom';
 import React from 'react';
 import { StyledNav, NavMenu, NavMenuItem } from '../styles/Styled.jsx';

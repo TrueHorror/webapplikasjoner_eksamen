@@ -1,0 +1,210 @@
+[
+    {
+        "city" : "Fredrikstad",
+        "number": 8,
+        "offices": [
+            {  
+                "id": 1,
+                "name": "Rørlegger 1", 
+                "adress": "Rørleggergata 1", 
+                "phone": "69 99 00 00", 
+                "email": "fredrikstad1@epost.com",
+                "workers": [{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                }, {
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                } ]
+            },
+            {
+                "id": 2,
+                "name": "Rørlegger 2", 
+                "adress": "Rørleggergata 2", 
+                "phone": "69 99 00 00", 
+                "email": "fredrikstad2@epost.com",
+                "workers": [{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                }, {
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                } ]
+            }
+        ]
+    },
+    {
+        "city" : "Sarpsborg",
+        "number": 5,
+        "offices": [
+            {
+                "id": 9,
+                "name": "Rørlegger 9", 
+                "adress": "Rørleggergata 9", 
+                "phone": "69 99 00 00", 
+                "email": "sarpsborg9@epost.com",
+                "workers": [{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                }, {
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                } ]
+            },
+            {
+                "id": 10,
+                "name": "Rørlegger 10", 
+                "adress": "Rørleggergata 10", 
+                "phone": "69 99 00 00", 
+                "email": "sarpsborg10@epost.com",
+                "workers": [{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                }, {
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                } ]
+            }
+        ]
+    },
+    {
+        "city" : "Moss",
+        "number": 4,
+        "offices": [
+            {
+                "id": 14,
+                "name": "Rørlegger 14", 
+                "adress": "Rørleggergata 14", 
+                "phone": "69 99 00 00", 
+                "email": "moss14@epost.com",
+                "workers": [{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                }, {
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                } ]
+            },
+            {
+                "id": 15,
+                "name": "Rørlegger 15", 
+                "adress": "Rørleggergata 15", 
+                "phone": "69 99 00 00", 
+                "email": "moss15@epost.com",
+                "workers": [{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                }, {
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                } ]
+            }
+        ]
+    },
+    {
+        "city" : "Oslo",
+        "number": 4,
+        "offices": [
+            {
+                "id": 18,
+                "name": "Rørlegger 18", 
+                "adress": "Rørleggergata 18", 
+                "phone": "69 99 00 00", 
+                "email": "oslo18@epost.com",
+                "workers": [{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                }, {
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                } ]
+            },
+            {
+                "id": 19,
+                "name": "Rørlegger 19", 
+                "adress": "Rørleggergata 19", 
+                "phone": "69 99 00 00", 
+                "email": "oslo19@epost.com",
+                "workers": [{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                }, {
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                },{
+                    "workerName": "Ansatt Ansattnavn",
+                    "possition": "Stilling"
+                } ]
+            }
+        ]
+    }
+]
