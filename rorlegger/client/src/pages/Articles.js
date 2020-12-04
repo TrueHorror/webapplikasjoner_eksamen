@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import {
   StyledBanner,
   StyledFilterButton,
@@ -8,16 +9,26 @@ import {
   StyledArticleListItem,
   StyledArticleListItemImage,
   StyledArticleListItemContent,
+  StyledArticleListItemContentHeader,
+  StyledArticleListItemContentText,
+  StyledArticleListItemContentHeaderCategory,
 } from '../styles/Styled';
 import { userIsLoggedInAsAdmin } from '../utils/authentication';
 import { getArticlesRequest } from '../utils/apiCalls';
 
 function Articles() {
   const [articles, setArticles] = useState([]);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getArticlesRequest()
-      .then((res) => setArticles(res.data.articles))
+      .then((res) => {
+        setArticles(res.data.articles);
+        dispatch({
+          type: 'SAVE_ARTICLES_IN_STORE',
+          articles: res.data.articles,
+        });
+      })
       .catch((e) => {
         console.log(e);
         console.error('Noe gikk galt');
@@ -28,15 +39,20 @@ function Articles() {
     <StyledArticleListItem>
       <StyledArticleListItemImage />
       <StyledArticleListItemContent>
-        <div>
+        <StyledArticleListItemContentHeader>
           <Link
             to={{ pathname: `/article/${article._id}` }}
             style={{ fontSize: '50px', textDecoration: 'none', color: 'black' }}
           >
             {article.Title}
           </Link>
-        </div>
-        <div>{article.Content}</div>
+          <StyledArticleListItemContentHeaderCategory>
+            {article.Category.Name}
+          </StyledArticleListItemContentHeaderCategory>
+        </StyledArticleListItemContentHeader>
+        <StyledArticleListItemContentText>
+          {article.Content}
+        </StyledArticleListItemContentText>
       </StyledArticleListItemContent>
     </StyledArticleListItem>
   ));

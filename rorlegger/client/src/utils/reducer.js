@@ -1,6 +1,7 @@
 const theStore = (
   state = {
     loggedInUser: {},
+    articles: [],
   },
   action
 ) => {
@@ -16,6 +17,10 @@ const theStore = (
     case 'REMOVE_USER_DATA':
       return {
         loggedInUser: '',
+      };
+    case 'SAVE_ARTICLES_IN_STORE':
+      return {
+        articles: action.articles,
       };
     default:
       return state;

@@ -6,20 +6,23 @@ const CategoryService = require("../services/category.service.js");
 
 exports.getArticles = async function (){
   try {
-    let articles = await Article.find()
-    console.log(articles)
-    let categories = await CategoryService.getCategories()
-    console.log(categories)
-    articles.forEach((article) => {
-      let category = categories.find((oneCategory) => {
-        console.log(oneCategory._id, article.Category)
-        return oneCategory._id === article.Category
-      })
-      console.log(article)
-      console.log(category)
-      article.Category = category.Name
-    })
-    console.log(articles)
+    return await Article.aggregate([
+      {
+        $lookup: {
+          from: 'categories',
+          localField: 'Category',
+          foreignField: '_id',
+          as: 'Category'
+        },
+      },
+      {
+        $addFields: {
+          Category: {
+            $arrayElemAt: ['$Category', 0]
+          }
+        }
+      }
+    ])
   } catch (e) {
     console.error(e)
     throw Error('Could not find any articles')
@@ -38,13 +41,16 @@ exports.createArticle = async function (data) {
     if (WriterService.writerExists(body.Writer.GivenName, body.Writer.FamilyName)){
       return await Article.create({
         Title: body.Title,
+        Ingress: body.Ingress,
         Content: body.Content,
+        SubHeader: body.SubHeader,
         Category: body.Category,
         Writer: {
           GivenName: body.Writer.GivenName,
           FamilyName: body.Writer.FamilyName
         },
-        User: data.user.sub
+        User: data.user.sub,
+        Published: new Date()
       })
     } else {
       throw Error('Writer not found')
