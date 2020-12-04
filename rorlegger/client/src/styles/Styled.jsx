@@ -247,6 +247,8 @@ export const StyledFilterButton = styled(StyledButton)`
   background-color: #dbdbdb;
   border: none;
   border-radius: 0px;
+  padding: 20px;
+  font-weight: 600;
 `;
 
 export const StyledSelect = styled.select`
@@ -292,7 +294,7 @@ export const StyledInputWrapper = styled.div`
   ${StyledLabel}
 `;
 
-// Articles
+// Article list
 
 export const StyledButtonGroupArticles = styled.div`
   display: flex;
@@ -326,3 +328,31 @@ export const StyledForm = styled.form`
 `;
 
 export const StyledTextArea = styled.textarea``;
+export const StyledArticleListItemContentHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const StyledArticleListItemContentText = styled.div`
+  max-height: 129px;
+  overflow: hidden;
+`;
+
+export const StyledArticleListItemContentHeaderCategory = styled.div`
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+// Article page
+
+export const StyledArticleContentDetails = styled.div`
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+`;
+
+export const StyledArticleContentDetailsWriter = styled.div``;
+
+export const StyledArticleContentDetailsDate = styled.div``;

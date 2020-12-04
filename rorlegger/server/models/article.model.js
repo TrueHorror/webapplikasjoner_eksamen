@@ -3,7 +3,10 @@ var Schema = mongoose.Schema;
 
 const ArticleSchema = new mongoose.Schema({
   Title: {type: String, required: true} ,
+  Ingress: {type: String, required: false},
+  SubHeader: {type: String, required: false},
   Content: {type: String, required: false},
+  Created: {type: Date, required: true},
   Category: {type: Schema.Types.ObjectId, ref: 'Category', required: true},
   Writer: {
     GivenName: {type: String, required: true},
