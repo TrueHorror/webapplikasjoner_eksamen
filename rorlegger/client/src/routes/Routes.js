@@ -4,6 +4,8 @@ import Offices from '../pages/Offices';
 import Articles from '../pages/Articles';
 import Contact from '../pages/Contact';
 import OfficesDetails from '../pages/OfficesDetails';
+import ArticleDetails from '../pages/ArticleDetails';
+import Login from '../pages/Login';
 
 function Routes() {
   return (
@@ -20,8 +22,14 @@ function Routes() {
       <Route path="/articles">
         <Articles />
       </Route>
+      <Route path="/article/:id">
+        <ArticleDetails />
+      </Route>
       <Route path="/contact">
         <Contact />
+      </Route>
+      <Route path="/login">
+        <Login />
       </Route>
     </Switch>
   );

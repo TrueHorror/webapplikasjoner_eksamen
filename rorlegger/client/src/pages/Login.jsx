@@ -12,11 +12,14 @@ import {
 } from '../styles/Styled';
 import { loginRequest } from '../utils/apiCalls';
 import { setToken, userIsLoggedIn } from '../utils/authentication';
+import { successToaster } from '../utils/global';
 
 function Login() {
   const dispatch = useDispatch();
 
-  if (!userIsLoggedIn()) {
+  if (userIsLoggedIn()) {
+    return <p>Du er logget inn</p>;
+  } else {
     return (
       <StyledMainContent>
         <StyledLogin>
@@ -37,7 +40,6 @@ function Login() {
       </StyledMainContent>
     );
   }
-  return <p>Du er logget inn</p>;
 
   async function loginAttempt() {
     const email = document.querySelector('#email-input').value;
@@ -47,6 +49,7 @@ function Login() {
       token = await loginRequest(email, pw);
       token = token.data.Token;
       setToken(token);
+      successToaster('Du er logget inn');
     } catch (e) {
       if (e.response && e.response.status === 401) {
         console.log('Feil brukernavn/passord');
