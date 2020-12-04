@@ -5,6 +5,7 @@ import Articles from '../pages/Articles';
 import Contact from '../pages/Contact';
 import OfficesDetails from '../pages/OfficesDetails';
 import Login from '../pages/Login';
+import CreateArticle from '../pages/CreateArticle';
 
 function Routes() {
   return (
@@ -26,6 +27,9 @@ function Routes() {
       </Route>
       <Route path="/login">
         <Login />
+      </Route>
+      <Route path="/createarticle">
+        <CreateArticle />
       </Route>
     </Switch>
   );
