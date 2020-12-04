@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 // Style and CSS taken from lectures and earlier mandatory exercises
@@ -9,7 +9,7 @@ export const StyledHeader = styled.header`
   box-shadow: 0px 5px 5px -5px #00000029;
   display: flex;
   flex-wrap: wrap;
-  @media only screen and (max-width: 510px) {
+  @media only screen and (max-width: 550px) {
     flex-direction: column;
   }
 `;
@@ -45,7 +45,7 @@ export const NavMenuItem = styled.li`
   float: left;
   display: flex;
   flex-direction: row;
-  @media only screen and (max-width: 510px) {
+  @media only screen and (max-width: 550px) {
     padding: 0;
     flex-direction: column;
   }
@@ -69,9 +69,6 @@ export const NavMenuItem = styled.li`
     &:hover {
       border-bottom: 4px solid #469fb9;
     }
-  }
-  @media only screen and (max-width: 600px) {
-    font-size: 50px;
   }
 `;
 
@@ -146,6 +143,12 @@ export const StyledAside = styled.aside`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const StyledNavLink = styled(NavLink)`
+  @media only screen and (max-width: 600px) {
+    font-size: 50px;
+  }
 `;
 
 // Main Links
