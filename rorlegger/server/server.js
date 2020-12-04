@@ -7,7 +7,7 @@ require('dotenv').config({path: __dirname + '/.env'})
 const secret = process.env.JWT_SECRET
 
 mongoose
-	.connect("mongodb://localhost:27017/articles", { useNewUrlParser: true })
+	.connect("mongodb+srv://admin_user:QOnOBxLcEMfV0iNV@cluster0.ftgkp.mongodb.net/articles?retryWrites=true&w=majority", { useNewUrlParser: true })
 	.then(() => {
 		const app = createServer()
 		app.listen(3001, () => {
@@ -23,8 +23,7 @@ function createServer(){
     origin: 'http://localhost:3000',
     optionsSuccessStatus: 200
   }))
-
-  app.use(jwt({secret, algorithms: ['HS256'] }).unless({path: ['/user', '/articles']}));
+  // app.use(jwt({secret, algorithms: ['HS256'] }).unless({path: ['/user', '/articles']}));
 
   app.use('/articles', require('./routes/articles.route.js'))
   app.use('/article', require('./routes/article.route.js'))

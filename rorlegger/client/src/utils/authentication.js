@@ -5,9 +5,11 @@ export function userIsLoggedIn() {
   let userData = Store.getState();
   userData = userData.loggedInUser;
   const now = Date.now();
-  const expires = userData.expires * 1000;
-  if (userData && expires && expires > now) {
-    return true;
+  if (userData && userData.expires) {
+    const expires = userData.expires * 1000;
+    if (userData && expires && expires > now) {
+      return true;
+    }
   }
   return false;
 }

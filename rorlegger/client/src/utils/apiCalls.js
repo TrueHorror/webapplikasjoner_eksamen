@@ -10,5 +10,5 @@ export async function loginRequest(email, pw) {
 }
 
 export async function getArticlesRequest() {
-  return Axios.get(`${url}/article`);
+  return Axios.get(`${url}/articles`);
 }
