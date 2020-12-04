@@ -249,6 +249,12 @@ export const StyledFilterButton = styled(StyledButton)`
   border-radius: 0px;
 `;
 
+export const StyledSelect = styled.select`
+  background-color: #dbdbdb;
+  border: none;
+  border-radius: 0px;
+`;
+
 export const StyledMaterialIcon = styled.i`
   margin: 5px;
   color: ${(props) => (props.primary ? '#469fb9' : 'black')};

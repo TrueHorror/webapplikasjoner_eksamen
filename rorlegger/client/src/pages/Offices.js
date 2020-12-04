@@ -19,6 +19,7 @@ import {
   StyledListHeader,
   StyledListText,
   StyledDetailsButton,
+  StyledSelect,
 } from '../styles/Styled.jsx';
 import data from '../tempOffices.json';
 
@@ -26,6 +27,8 @@ function Offices() {
   const [cities, setCities] = useState(data);
 
   const [cardView, setCardView] = useState(true);
+
+  const [filterOption, setFilterOption] = useState('Alle');
 
   const redirectToDetailedPage = (e) => {
     console.log(e.target.name);
@@ -40,6 +43,10 @@ function Offices() {
     }
   };
 
+  const filterOffices = (e) => {
+    setFilterOption(e.target.value);
+  };
+
   return (
     <>
       <StyledBanner>
@@ -47,7 +54,13 @@ function Offices() {
       </StyledBanner>
       <StyledMainContent>
         <StyledFilterOptions>
-          <StyledFilterButton>Filter</StyledFilterButton>
+          <StyledSelect readOnly value={filterOption} onChange={filterOffices}>
+            <option value="Alle">Alle</option>
+            <option value="Fredrikstad">Fredrikstad</option>
+            <option value="Sarpsborg">Sarpsborg</option>
+            <option value="Moss">Moss</option>
+            <option value="Oslo">Oslo</option>
+          </StyledSelect>
           {cardView ? (
             <>
               <StyledMaterialIcon primary className="material-icons">
@@ -74,43 +87,85 @@ function Offices() {
             </>
           )}
         </StyledFilterOptions>
-        {cities.map((c) => (
-          <OfficeView key={c.city}>
-            <h2>{`${c.city} (${c.number} kontorer)`}</h2>
-            <Row>
-              {cardView ? (
-                c.offices.map((off) => (
-                  <OfficeCards key={off.name}>
-                    <h3>{off.name}</h3>
-                    <p>{off.adress}</p>
-                    <p>{off.phone}</p>
-                    <p>{off.email}</p>
-                    <StyledDetailsButton
-                      name={off.name}
-                      to={`/office/${off.id}`}
-                    >
-                      Detaljer
-                    </StyledDetailsButton>
-                  </OfficeCards>
-                ))
+        {filterOption === 'Alle'
+          ? cities.map((c) => (
+              <OfficeView key={c.city}>
+                <h2>{`${c.city} (${c.number} kontorer)`}</h2>
+                <Row>
+                  {cardView ? (
+                    c.offices.map((off) => (
+                      <OfficeCards key={off.name}>
+                        <h3>{off.name}</h3>
+                        <p>{off.adress}</p>
+                        <p>{off.phone}</p>
+                        <p>{off.email}</p>
+                        <StyledDetailsButton
+                          name={off.name}
+                          to={`/office/${off.id}`}
+                        >
+                          Detaljer
+                        </StyledDetailsButton>
+                      </OfficeCards>
+                    ))
+                  ) : (
+                    <StyledOfficesList>
+                      {c.offices.map((off) => (
+                        <StyledListItems>
+                          <StyledListHeader>{off.name}</StyledListHeader>
+                          <StyledListText>{off.adress}</StyledListText>
+                          <StyledListText>{off.phone}</StyledListText>
+                          <StyledListText>{off.email}</StyledListText>
+                          <StyledDetailsButton name={off.name}>
+                            Detaljer
+                          </StyledDetailsButton>
+                        </StyledListItems>
+                      ))}
+                    </StyledOfficesList>
+                  )}
+                </Row>
+              </OfficeView>
+            ))
+          : cities.map((c) =>
+              c.city === filterOption ? (
+                <OfficeView key={c.city}>
+                  <h2>{`${c.city} (${c.number} kontorer)`}</h2>
+                  <Row>
+                    {cardView ? (
+                      c.offices.map((off) => (
+                        <OfficeCards key={off.name}>
+                          <h3>{off.name}</h3>
+                          <p>{off.adress}</p>
+                          <p>{off.phone}</p>
+                          <p>{off.email}</p>
+                          <StyledDetailsButton
+                            name={off.name}
+                            to={`/office/${off.id}`}
+                          >
+                            Detaljer
+                          </StyledDetailsButton>
+                        </OfficeCards>
+                      ))
+                    ) : (
+                      <StyledOfficesList>
+                        {c.offices.map((off) => (
+                          <StyledListItems>
+                            <StyledListHeader>{off.name}</StyledListHeader>
+                            <StyledListText>{off.adress}</StyledListText>
+                            <StyledListText>{off.phone}</StyledListText>
+                            <StyledListText>{off.email}</StyledListText>
+                            <StyledDetailsButton name={off.name}>
+                              Detaljer
+                            </StyledDetailsButton>
+                          </StyledListItems>
+                        ))}
+                      </StyledOfficesList>
+                    )}
+                  </Row>
+                </OfficeView>
               ) : (
-                <StyledOfficesList>
-                  {c.offices.map((off) => (
-                    <StyledListItems>
-                      <StyledListHeader>{off.name}</StyledListHeader>
-                      <StyledListText>{off.adress}</StyledListText>
-                      <StyledListText>{off.phone}</StyledListText>
-                      <StyledListText>{off.email}</StyledListText>
-                      <StyledDetailsButton name={off.name}>
-                        Detaljer
-                      </StyledDetailsButton>
-                    </StyledListItems>
-                  ))}
-                </StyledOfficesList>
-              )}
-            </Row>
-          </OfficeView>
-        ))}
+                console.log('Easter Egg')
+              )
+            )}
       </StyledMainContent>
     </>
   );
