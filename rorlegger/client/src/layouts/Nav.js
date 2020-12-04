@@ -1,6 +1,7 @@
 /* eslint-disable import/no-cycle */
 import { NavLink } from 'react-router-dom';
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   StyledNav,
   NavMenu,
@@ -10,15 +11,34 @@ import {
 import { userIsLoggedIn } from '../utils/authentication';
 
 function Nav() {
-  const LoginLink = () => {
+  const user = useSelector((state) => state.loggedInUser);
+  const dispatch = useDispatch();
+
+  const LoginArea = () => {
+    const logoutUser = () => {
+      dispatch({ type: 'USER_LOGOUT' });
+    };
+
     if (!userIsLoggedIn()) {
       return (
         <NavLink exact to="/login">
           Logg inn
         </NavLink>
       );
+    } else {
+      return (
+        <div>
+          <div>
+            Logget inn som:{' '}
+            <span style={{ fontWeight: '600' }}>{user.givenName}</span>
+          </div>
+          <div>{user.email}</div>
+          <button type="button" onClick={logoutUser}>
+            Logg ut
+          </button>
+        </div>
+      );
     }
-    return null;
   };
 
   return (
@@ -37,7 +57,7 @@ function Nav() {
           <StyledNavLink exact to="/contact">
             Kontakt
           </StyledNavLink>
-          <LoginLink />
+          <LoginArea />
         </NavMenuItem>
       </NavMenu>
     </StyledNav>
