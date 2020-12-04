@@ -208,18 +208,17 @@ export const StyledDetailedOfficeView = styled(OfficeView)`
 export const StyledButton = styled.button`
   color: black;
   font-size: 1em;
-  margin: 10px;
-
   border: 1px solid #469fb9;
-  border-radius: 3px;
   background: white;
   &:hover {
     background: #469fb9;
     color: white;
     cursor: pointer;
   }
-
   margin: 10px auto;
+  padding: 15px;
+  margin-right: 10px;
+  border: none;
 `;
 
 export const StyledDetailsButton = styled(Link)`
@@ -356,3 +355,23 @@ export const StyledArticleContentDetails = styled.div`
 export const StyledArticleContentDetailsWriter = styled.div``;
 
 export const StyledArticleContentDetailsDate = styled.div``;
+
+export const StyledRedButton = styled(StyledButton)`
+  color: white;
+  background-color: #e91e63;
+  &:hover {
+    background: #469fb9;
+  }
+`;
+
+export const StyledGreenButton = styled(StyledButton)`
+  color: white;
+  background-color: #8bc34a;
+  &:hover {
+    background: #469fb9;
+  }
+`;
+
+export const StyledAdminButtons = styled.div`
+  text-align: left;
+`;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { generateUniqueID } from 'web-vitals/dist/lib/generateUniqueID';
 import {
   StyledBanner,
   StyledFilterButton,
@@ -12,19 +13,22 @@ import {
   StyledArticleListItemContentHeader,
   StyledArticleListItemContentText,
   StyledArticleListItemContentHeaderCategory,
+  StyledInput,
 } from '../styles/Styled';
 
 import { userIsLoggedInAsAdmin } from '../utils/authentication';
 import { getArticlesRequest } from '../utils/apiCalls';
 
 function Articles() {
-  const [articles, setArticles] = useState([]);
+  const articles = useSelector((state) => state.articles);
+  const [filteredArticles, setFilteredArticles] = useState([]);
+  const [searchString, setSearchString] = useState('');
   const dispatch = useDispatch();
 
   useEffect(() => {
     getArticlesRequest()
       .then((res) => {
-        setArticles(res.data.articles);
+        setFilteredArticles(articles);
         dispatch({
           type: 'SAVE_ARTICLES_IN_STORE',
           articles: res.data.articles,
@@ -36,8 +40,8 @@ function Articles() {
       });
   }, []);
 
-  const articlesList = articles.map((article) => (
-    <StyledArticleListItem>
+  const articlesList = filteredArticles.map((article) => (
+    <StyledArticleListItem key={generateUniqueID()}>
       <StyledArticleListItemImage />
       <StyledArticleListItemContent>
         <StyledArticleListItemContentHeader>
@@ -65,6 +69,22 @@ function Articles() {
     return null;
   };
 
+  const searchList = (evt) => {
+    console.log(evt.target.value);
+    setSearchString(evt.target.value);
+    const rx = new RegExp(evt.target.value, 'i');
+    const filtered = articles.filter((article) => {
+      console.log(rx.test(article.Title));
+      return rx.test(article.Title);
+    });
+    setFilteredArticles(filtered);
+  };
+
+  // eslint-disable-next-line no-undef
+  const FilterOnCategory = categories.map((category) => (
+    <option value={category._id}>{category.Name}</option>
+  ));
+
   return (
     <section>
       <StyledBanner>
@@ -76,10 +96,16 @@ function Articles() {
             <NewArticleButton />
           </div>
           <div>
-            <StyledFilterButton style={{ marginRight: '10px' }}>
-              SØK
-            </StyledFilterButton>
-            <StyledFilterButton>FILTER</StyledFilterButton>
+            <StyledInput
+              id="search-input"
+              onChange={searchList}
+              defaultValue={searchString}
+              type="text"
+              style={{ marginRight: '10px' }}
+            />
+            <select>
+              <FilterOnCategory />
+            </select>
           </div>
         </StyledButtonGroupArticles>
         <div>{articlesList}</div>
