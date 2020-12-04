@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-use-before-define */
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   StyledMainContent,
   StyledLogin,
@@ -11,13 +11,13 @@ import {
   StyledLabel,
 } from '../styles/Styled';
 import { loginRequest } from '../utils/apiCalls';
-import { setToken, userIsLoggedIn } from '../utils/authentication';
-import { successToaster } from '../utils/global';
+import { setToken } from '../utils/authentication';
+import { errorToaster, successToaster } from '../utils/global';
 
 function Login() {
-  const dispatch = useDispatch();
+  const user = useSelector((state) => state.loggedInUser);
 
-  if (userIsLoggedIn()) {
+  if (user.email) {
     return <p>Du er logget inn</p>;
   } else {
     return (
@@ -52,6 +52,7 @@ function Login() {
       successToaster('Du er logget inn');
     } catch (e) {
       if (e.response && e.response.status === 401) {
+        errorToaster('Feil brukernavn/passord');
         console.log('Feil brukernavn/passord');
       } else {
         console.error(e);
