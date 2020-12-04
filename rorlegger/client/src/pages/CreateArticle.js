@@ -23,15 +23,16 @@ function CreateArticle({ handleOverlay }) {
     SubHeader: '',
     Content: '',
     Category: {},
-    Writer: {
-      GivenName: '',
-      FamilyName: '',
-    },
+    Writer: {},
   });
 
   const [categories, setCategories] = useState([]);
   const [categoryOption, setCategoryOption] = useState('');
   const [writerLabelOption, setWriterLabelOption] = useState('');
+  const [writerName, setWriterName] = useState({
+    GivenName: '',
+    FamilyName: '',
+  });
 
   useEffect(() => {
     getCategories()
@@ -44,7 +45,10 @@ function CreateArticle({ handleOverlay }) {
       });
   }, []);
 
-  async function createAttempt() {
+  // TODO: Se på apicalls med createArticleRequest. 400 error... response [Object object]?
+  async function createAttempt(event) {
+    event.preventDefault();
+    setFormData({ ...formData, Writer: writerName });
     const dataBody = formData;
 
     try {
@@ -52,12 +56,17 @@ function CreateArticle({ handleOverlay }) {
       successToaster('Artikkel laget');
     } catch (e) {
       if (e.response && e.response.status === 400) {
-        console.log('Noe gikk galt med lagringen');
+        console.log(`Noe gikk galt med lagringen${e.response}`);
       } else {
         console.log(e);
       }
     }
   }
+
+  const updateValue = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    console.log(formData);
+  };
 
   const categorySelect = (e) => {
     setCategoryOption(e.target.value);
@@ -72,6 +81,15 @@ function CreateArticle({ handleOverlay }) {
     handleOverlay();
     // code...
   };
+  const updateWriterName = (e) => {
+    const fullName = e.target.value.split(' ');
+    const givenName = fullName[0];
+    const familyName = fullName[1];
+    setWriterName({
+      GivenName: givenName,
+      FamilyName: familyName,
+    });
+  };
 
   console.log(categories);
 
@@ -83,13 +101,33 @@ function CreateArticle({ handleOverlay }) {
       <StyledMainContent>
         <StyledForm>
           <StyledLabel htmlFor="Title">Tittel:</StyledLabel>
-          <StyledInput name="Title" placeholder="Tittel..." />
+          <StyledInput
+            value={formData.Title}
+            name="Title"
+            onChange={updateValue}
+            placeholder="Tittel..."
+          />
           <StyledLabel htmlFor="Ingress">Ingress:</StyledLabel>
-          <StyledInput name="Ingress" placeholder="Ingress..." />
+          <StyledInput
+            value={formData.Ingress}
+            name="Ingress"
+            onChange={updateValue}
+            placeholder="Ingress..."
+          />
           <StyledLabel htmlFor="SubHeader">Under tittel:</StyledLabel>
-          <StyledInput name="SubHeader" placeholder="SubHeader..." />
+          <StyledInput
+            value={formData.SubHead}
+            name="SubHeader"
+            onChange={updateValue}
+            placeholder="SubHeader..."
+          />
           <StyledLabel htmlFor="Content">Innhold:</StyledLabel>
-          <StyledTextArea name="Content" placeholder="Content..." />
+          <StyledTextArea
+            value={formData.Content}
+            name="Content"
+            onChange={updateValue}
+            placeholder="Content..."
+          />
           <StyledLabel htmlFor="Category">Kategori:</StyledLabel>
           <div>
             <StyledSelect
@@ -117,9 +155,13 @@ function CreateArticle({ handleOverlay }) {
             <option>Admin: </option>
           </StyledSelect>
           <StyledLabel htmlFor="Writer">Forfatter:</StyledLabel>
-          <StyledInput name="Writer" placeholder="Forfatter..." />
+          <StyledInput
+            name="Writer"
+            onChange={updateWriterName}
+            placeholder="Forfatter..."
+          />
 
-          <StyledButton>Create</StyledButton>
+          <StyledButton onClick={createAttempt}>Create</StyledButton>
         </StyledForm>
       </StyledMainContent>
     </section>
