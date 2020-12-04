@@ -1,7 +1,12 @@
 /* eslint-disable import/no-cycle */
 import { NavLink } from 'react-router-dom';
 import React from 'react';
-import { StyledNav, NavMenu, NavMenuItem } from '../styles/Styled.jsx';
+import {
+  StyledNav,
+  NavMenu,
+  NavMenuItem,
+  StyledNavLink,
+} from '../styles/Styled.jsx';
 import { userIsLoggedIn } from '../utils/authentication';
 
 function Nav() {
@@ -20,18 +25,18 @@ function Nav() {
     <StyledNav>
       <NavMenu>
         <NavMenuItem>
-          <NavLink exact to="/">
+          <StyledNavLink exact to="/">
             Hjem
-          </NavLink>
-          <NavLink exact to="/offices">
+          </StyledNavLink>
+          <StyledNavLink exact to="/offices">
             Kontorer
-          </NavLink>
-          <NavLink exact to="/articles">
+          </StyledNavLink>
+          <StyledNavLink exact to="/articles">
             Fagartikler
-          </NavLink>
-          <NavLink exact to="/contact">
+          </StyledNavLink>
+          <StyledNavLink exact to="/contact">
             Kontakt
-          </NavLink>
+          </StyledNavLink>
           <LoginLink />
         </NavMenuItem>
       </NavMenu>

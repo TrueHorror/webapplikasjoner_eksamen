@@ -31,12 +31,6 @@ function OfficesDetails() {
 
   const [dataFromJson, setDataFromJson] = useState(data);
 
-  const [currentOffice, setCurrentOffice] = useState();
-
-  const updateData = (paramData) => {
-    // setCurrentOffice(paramData);
-  };
-
   let officeData;
 
   for (let i = 0; i < dataFromJson.length; i++) {
@@ -47,16 +41,15 @@ function OfficesDetails() {
       }
     }
   }
-  updateData(officeData);
 
   return (
     <>
       <StyledBanner>
-        <h1>hei</h1>
+        <h1>Kontor {officeData.name}</h1>
       </StyledBanner>
       <StyledMainContent>
         <StyledDetailedOfficeView>
-          <h2>Velkommen til {/* currentOffice.name */}</h2>
+          <h2>Velkommen til {officeData.name}</h2>
           <p>
             Lorem ipsum dolor sit amet, consectetur sadipscing elitr, sed do
             eiusmod tempor incididunt ut labore et dolore magna. Lorem ipsum
@@ -76,7 +69,7 @@ function OfficesDetails() {
           </WorkerCardsContainer>
         </StyledDetailedOfficeView>
         <StyledMainSections>
-          <h1>Kontakt oss på {/* currentOffice.phone */}</h1>
+          <h1>Kontakt oss på {officeData.phone}</h1>
         </StyledMainSections>
       </StyledMainContent>
     </>
