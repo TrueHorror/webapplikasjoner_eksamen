@@ -309,3 +309,14 @@ export const StyledArticleListItemContent = styled.div`
   width: 70%;
   text-align: left;
 `;
+
+// Form
+export const StyledForm = styled.form`
+  margin: 0 auto;
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;
+
+export const StyledTextArea = styled.textarea``;
