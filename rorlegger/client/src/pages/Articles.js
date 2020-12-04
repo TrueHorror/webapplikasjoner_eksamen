@@ -12,6 +12,7 @@ import {
   StyledArticleListItemContentHeader,
   StyledArticleListItemContentText,
   StyledArticleListItemContentHeaderCategory,
+  StyledLinkButton,
 } from '../styles/Styled';
 
 import { userIsLoggedInAsAdmin } from '../utils/authentication';
@@ -60,7 +61,11 @@ function Articles() {
 
   const NewArticleButton = () => {
     if (userIsLoggedInAsAdmin()) {
-      return <StyledFilterButton>NY ARTIKKEL</StyledFilterButton>;
+      return (
+        <StyledLinkButton to={{ pathname: `/createarticle` }}>
+          NY ARTIKKEL
+        </StyledLinkButton>
+      );
     }
     return null;
   };
@@ -74,8 +79,6 @@ function Articles() {
         <StyledButtonGroupArticles>
           <div>
             <NewArticleButton />
-          </div>
-          <div>
             <StyledFilterButton style={{ marginRight: '10px' }}>
               SØK
             </StyledFilterButton>
