@@ -27,41 +27,52 @@ function Articles() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    getArticlesRequest()
-      .then((res) => {
-        setFilteredArticles(articles);
+    const getData = async () => {
+      try {
+        const res = await getArticlesRequest();
         dispatch({
           type: 'SAVE_ARTICLES_IN_STORE',
           articles: res.data.articles,
         });
-      })
-      .catch((e) => {
+        setFilteredArticles(res.data.articles);
+      } catch (e) {
         console.log(e);
         console.error('Noe gikk galt');
-      });
+      }
+    };
+    getData();
   }, []);
 
-  const articlesList = filteredArticles.map((article) => (
-    <StyledArticleListItem key={generateUniqueID()}>
-      <StyledArticleListItemImage />
-      <StyledArticleListItemContent>
-        <StyledArticleListItemContentHeader>
-          <Link
-            to={{ pathname: `/article/${article._id}` }}
-            style={{ fontSize: '50px', textDecoration: 'none', color: 'black' }}
-          >
-            {article.Title}
-          </Link>
-          <StyledArticleListItemContentHeaderCategory>
-            {article.Category.Name}
-          </StyledArticleListItemContentHeaderCategory>
-        </StyledArticleListItemContentHeader>
-        <StyledArticleListItemContentText>
-          {article.Content}
-        </StyledArticleListItemContentText>
-      </StyledArticleListItemContent>
-    </StyledArticleListItem>
-  ));
+  const ArticlesList = () => {
+    if (filteredArticles && filteredArticles.length > 0) {
+      return filteredArticles.map((article) => (
+        <StyledArticleListItem key={generateUniqueID()}>
+          <StyledArticleListItemImage />
+          <StyledArticleListItemContent>
+            <StyledArticleListItemContentHeader>
+              <Link
+                to={{ pathname: `/article/${article._id}` }}
+                style={{
+                  fontSize: '50px',
+                  textDecoration: 'none',
+                  color: 'black',
+                }}
+              >
+                {article.Title}
+              </Link>
+              <StyledArticleListItemContentHeaderCategory>
+                {article.Category.Name}
+              </StyledArticleListItemContentHeaderCategory>
+            </StyledArticleListItemContentHeader>
+            <StyledArticleListItemContentText>
+              {article.Content}
+            </StyledArticleListItemContentText>
+          </StyledArticleListItemContent>
+        </StyledArticleListItem>
+      ));
+    }
+    return null;
+  };
 
   const NewArticleButton = () => {
     if (userIsLoggedInAsAdmin()) {
@@ -71,13 +82,9 @@ function Articles() {
   };
 
   const searchList = (evt) => {
-    console.log(evt.target.value);
     setSearchString(evt.target.value);
     const rx = new RegExp(evt.target.value, 'i');
-    const filtered = articles.filter((article) => {
-      console.log(rx.test(article.Title));
-      return rx.test(article.Title);
-    });
+    const filtered = articles.filter((article) => rx.test(article.Title));
     setFilteredArticles(filtered);
   };
 
@@ -106,7 +113,9 @@ function Articles() {
             />
           </div>
         </StyledButtonGroupArticles>
-        <div>{articlesList}</div>
+        <div>
+          <ArticlesList />
+        </div>
       </StyledMainContent>
     </section>
   );
