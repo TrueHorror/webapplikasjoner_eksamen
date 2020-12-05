@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { generateUniqueID } from 'web-vitals/dist/lib/generateUniqueID';
 import {
   StyledBanner,
-  StyledFilterButton,
   StyledMainContent,
   StyledButtonGroupArticles,
   StyledArticleListItem,
@@ -14,6 +13,7 @@ import {
   StyledArticleListItemContentText,
   StyledArticleListItemContentHeaderCategory,
   StyledInput,
+  StyledLinkButton,
 } from '../styles/Styled';
 
 import { userIsLoggedInAsAdmin } from '../utils/authentication';
@@ -81,7 +81,11 @@ function Articles() {
 
   const NewArticleButton = () => {
     if (userIsLoggedInAsAdmin()) {
-      return <StyledFilterButton>NY ARTIKKEL</StyledFilterButton>;
+      return (
+        <StyledLinkButton to={{ pathname: `/createarticle` }}>
+          NY ARTIKKEL
+        </StyledLinkButton>
+      );
     }
     return null;
   };
