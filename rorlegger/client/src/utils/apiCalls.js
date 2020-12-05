@@ -13,6 +13,10 @@ export async function loginRequest(email, pw) {
   });
 }
 
+export async function getWriters() {
+  return Axios.get(`${url}/writers`);
+}
+
 export async function getArticlesRequest() {
   return Axios.get(`${url}/articles`);
 }

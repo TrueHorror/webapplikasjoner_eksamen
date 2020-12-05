@@ -1,0 +1,30 @@
+ const updateFullName = (e) => {
+    setFullName(e.target.value);
+  };
+
+  useEffect(() => {
+    if (fullName) {
+      console.log('updating Writername');
+      const updateWriterName = () => {
+        const twoNames = fullName.split(' ');
+
+        const givenName = twoNames[0];
+        const familyName = twoNames[1];
+        setWriterName({
+          GivenName: givenName,
+          FamilyName: familyName,
+        });
+      };
+      updateWriterName();
+    }
+  }, [fullName]);
+
+  useEffect(() => {
+    if (writerName) {
+      console.log('adding writer to formData');
+      const addWriterToFormData = () => {
+        setFormData({ ...formData, Writer: writerName });
+      };
+      addWriterToFormData();
+    }
+  }, [writerName]);
