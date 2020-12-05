@@ -40,6 +40,11 @@ function Articles() {
         console.error('Noe gikk galt');
       }
     };
+    /* const getCategories = async () => {
+      try {
+        const res = await getC
+      }
+    } */
     getData();
   }, []);
 
@@ -110,6 +115,7 @@ function Articles() {
               defaultValue={searchString}
               type="text"
               style={{ marginRight: '10px' }}
+              placeholder="søk"
             />
           </div>
         </StyledButtonGroupArticles>
