@@ -1,6 +1,5 @@
 /* eslint-disable import/no-named-as-default-member */
 /* eslint-disable import/no-cycle */
-import './App.css';
 import { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import Modal from './components/Modal';
