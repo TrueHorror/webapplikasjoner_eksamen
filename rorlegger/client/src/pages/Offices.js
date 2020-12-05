@@ -44,7 +44,9 @@ function Offices() {
   };
 
   const filterOffices = (e) => {
+    console.log(e.target.value);
     setFilterOption(e.target.value);
+    console.log(filterOption);
   };
 
   return (

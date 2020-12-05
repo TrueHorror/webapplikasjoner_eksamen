@@ -26,6 +26,9 @@ export async function getAllArticles() {
     headers: { Authorization: `Bearer ${getToken()}` },
   });
 }
+export async function getWriters() {
+  return Axios.get(`${url}/writers`);
+}
 
 export async function createArticleRequest(dataBody) {
   return Axios.post(`${url}/article`, dataBody, {
