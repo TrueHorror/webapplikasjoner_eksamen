@@ -254,6 +254,7 @@ export const StyledSelect = styled.select`
   background-color: #dbdbdb;
   border: none;
   border-radius: 0px;
+  margin-bottom: 15px;
 `;
 
 export const StyledMaterialIcon = styled.i`
@@ -287,6 +288,8 @@ export const StyledLabel = styled.label``;
 export const StyledInput = styled.input`
   border: 1px solid #469fb9;
   border-radius: 3px;
+  margin-bottom: 15px;
+  height: 30px;
 `;
 
 export const StyledInputWrapper = styled.div`
@@ -326,7 +329,10 @@ export const StyledForm = styled.form`
   justify-content: space-between;
 `;
 
-export const StyledTextArea = styled.textarea``;
+export const StyledTextArea = styled.textarea`
+  resize: none;
+  height: 200px;
+`;
 export const StyledArticleListItemContentHeader = styled.div`
   display: flex;
   justify-content: space-between;
@@ -374,4 +380,53 @@ export const StyledGreenButton = styled(StyledButton)`
 
 export const StyledAdminButtons = styled.div`
   text-align: left;
+`;
+
+export const StyledLinkButton = styled(Link)`
+  color: black;
+  font-size: 1em;
+  margin-right: 10px;
+  border: 1px solid #469fb9;
+  text-decoration: none;
+  &:hover {
+    background: #469fb9;
+    color: white;
+    cursor: pointer;
+  }
+
+  background-color: #dbdbdb;
+  border: none;
+  border-radius: 0px;
+  padding: 20px;
+  font-weight: 600;
+`;
+
+// Overlay Styling
+export const StyledOverlay = styled.div`
+  // Tatt fra TODO oblig og https://www.w3schools.com/howto/howto_css_overlay.asp
+  position: fixed; /* Sit on top of the page content */
+  display: flex; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+`;
+
+export const StyledOverlayForm = styled(StyledForm)`
+  // From TODO oblig
+  display: flex;
+  padding: 10px 20px 10px 20px;
+  top: 195px;
+  left: 520px;
+  width: 326px;
+  height: 378px;
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0px 1px 8px #00000029;
+  border-radius: 8px;
+  opacity: 1;
+  margin: auto auto;
 `;
