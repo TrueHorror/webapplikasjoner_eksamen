@@ -86,6 +86,7 @@ export const StyledBanner = styled.figure`
 // Main-Content with rom and column. Inspiration from: https://dev.to/drews256/ridiculously-easy-row-and-column-layouts-with-flexbox-1k01 -----------------------------------------------------------------
 export const StyledMainContent = styled.main`
   margin: 0 auto;
+  padding: 30px 0;
   width: 70%;
 `;
 
