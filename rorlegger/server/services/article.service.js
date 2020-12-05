@@ -50,7 +50,7 @@ exports.createArticle = async function (data) {
           FamilyName: body.Writer.FamilyName
         },
         User: data.user.sub,
-        Published: new Date()
+        Created: new Date()
       })
     } else {
       throw Error('Writer not found')
