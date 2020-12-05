@@ -17,7 +17,11 @@ import {
 } from '../styles/Styled';
 
 import { userIsLoggedInAsAdmin } from '../utils/authentication';
-import { getArticlesRequest, getCategoriesRequest } from '../utils/apiCalls';
+import {
+  getNonSecretArticlesRequest,
+  getCategoriesRequest,
+  getAllArticles,
+} from '../utils/apiCalls';
 import { errorToaster } from '../utils/global';
 
 function Articles() {
@@ -26,11 +30,17 @@ function Articles() {
   const [categories, setCategories] = useState([]);
   const [searchString, setSearchString] = useState('');
   const [chosenCategory, setChosenCategory] = useState('');
+  const user = useSelector((state) => state.loggedInUser);
   const dispatch = useDispatch();
 
   const getData = async () => {
     try {
-      const res = await getArticlesRequest();
+      let res;
+      if (user.email) {
+        res = await getAllArticles();
+      } else {
+        res = await getNonSecretArticlesRequest();
+      }
       dispatch({
         type: 'SAVE_ARTICLES_IN_STORE',
         articles: res.data.articles,
@@ -58,7 +68,7 @@ function Articles() {
               <Link
                 to={{ pathname: `/article/${article._id}` }}
                 style={{
-                  fontSize: '50px',
+                  fontSize: '40px',
                   textDecoration: 'none',
                   color: 'black',
                 }}

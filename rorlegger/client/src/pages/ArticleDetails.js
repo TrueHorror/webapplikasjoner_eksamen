@@ -11,7 +11,7 @@ import {
   StyledRedButton,
   StyledAdminButtons,
 } from '../styles/Styled';
-import { getArticlesRequest } from '../utils/apiCalls';
+import { getNonSecretArticlesRequest } from '../utils/apiCalls';
 import { errorToaster } from '../utils/global';
 
 function ArticleDetails() {
@@ -27,7 +27,7 @@ function ArticleDetails() {
       foundArticle = articles.find((oneArticle) => oneArticle._id === id);
     } else {
       try {
-        const tempArticles = await getArticlesRequest();
+        const tempArticles = await getNonSecretArticlesRequest();
         setArticle(
           tempArticles.data.articles.find((oneArticle) => oneArticle._id === id)
         );
