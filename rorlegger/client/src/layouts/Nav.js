@@ -18,6 +18,12 @@ function Nav() {
     const logoutUser = () => {
       dispatch({ type: 'USER_LOGOUT' });
     };
+    let userType = '';
+    if (user.userType === 0) {
+      userType = 'admin';
+    } else {
+      userType = 'bruker';
+    }
 
     if (!userIsLoggedIn()) {
       return (
@@ -30,7 +36,8 @@ function Nav() {
         <div>
           <div>
             Logget inn som:{' '}
-            <span style={{ fontWeight: '600' }}>{user.givenName}</span>
+            <span style={{ fontWeight: '600' }}>{user.givenName}</span> (
+            {userType})
           </div>
           <div>{user.email}</div>
           <button type="button" onClick={logoutUser}>

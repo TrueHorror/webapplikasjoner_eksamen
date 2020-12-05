@@ -4,9 +4,35 @@ var WriterService = require('../services/writer.service')
 const CategoryService = require("../services/category.service.js");
 
 
-exports.getArticles = async function (){
+exports.getAllArticles = async function (){
   try {
     return await Article.aggregate([
+      {
+        $lookup: {
+          from: 'categories',
+          localField: 'Category',
+          foreignField: '_id',
+          as: 'Category'
+        },
+      },
+      {
+        $addFields: {
+          Category: {
+            $arrayElemAt: ['$Category', 0]
+          }
+        }
+      }
+    ])
+  } catch (e) {
+    console.error(e)
+    throw Error('Could not find any articles')
+  }
+}
+
+exports.getNonSecretArticles = async function (){
+  try {
+    return await Article.aggregate([
+      { $match: {'Secret': false}},
       {
         $lookup: {
           from: 'categories',
@@ -33,7 +59,6 @@ exports.getArticles = async function (){
 exports.createArticle = async function (data) {
   let body = data.body
   try {
-    console.log(data)
     //TODO Test this (admin access only)
     if (data.user.userType !== 0){
       throw 'Only admins can create articles'
@@ -50,7 +75,8 @@ exports.createArticle = async function (data) {
           FamilyName: body.Writer.FamilyName
         },
         User: data.user.sub,
-        Created: new Date()
+        Created: new Date(),
+        Secret: body.Secret
       })
     } else {
       throw Error('Writer not found')

@@ -7,7 +7,7 @@ import {
   StyledOverlay,
   StyledButton,
 } from '../styles/Styled';
-import { createCategory } from '../utils/apiCalls';
+import { createCategoryRequest } from '../utils/apiCalls';
 
 function Modal({ handleOverlay }) {
   const [newCategory, setNewCategory] = useState({
@@ -17,7 +17,7 @@ function Modal({ handleOverlay }) {
   async function createNewCategory() {
     const data = newCategory;
     try {
-      await createCategory(data);
+      await createCategoryRequest(data);
     } catch (e) {
       if (e.response && e.response.status === 400) {
         console.log('Noe gik galt');

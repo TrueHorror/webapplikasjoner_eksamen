@@ -5,14 +5,12 @@ const saltRounds = 10;
 
 exports.createUser = async function (data) {
   try {
-    let userType = exports.getUserType(data.UserType)
-
     bcrypt.genSalt(saltRounds, async function(err, salt) {
       bcrypt.hash(data.Password, salt, async function(err, hash) {
         let res = await User.create({
           GivenName: data.GivenName,
           FamilyName: data.FamilyName,
-          UserType: userType,
+          UserType: 1,
           Email: data.Email,
           Password: hash
         })

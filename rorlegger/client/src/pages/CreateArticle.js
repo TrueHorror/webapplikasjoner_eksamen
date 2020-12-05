@@ -13,7 +13,7 @@ import {
   StyledSelect,
   StyledTextArea,
 } from '../styles/Styled';
-import { createArticleRequest, getCategories } from '../utils/apiCalls';
+import { createArticleRequest, getCategoriesRequest } from '../utils/apiCalls';
 import { successToaster } from '../utils/global';
 
 function CreateArticle({ handleOverlay }) {
@@ -35,7 +35,7 @@ function CreateArticle({ handleOverlay }) {
   });
 
   useEffect(() => {
-    getCategories()
+    getCategoriesRequest()
       .then((res) => {
         setCategories(res.data.categories);
       })
