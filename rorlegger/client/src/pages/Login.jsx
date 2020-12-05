@@ -2,6 +2,7 @@
 /* eslint-disable no-use-before-define */
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   StyledMainContent,
   StyledLogin,
@@ -23,19 +24,32 @@ function Login() {
     return (
       <StyledMainContent>
         <StyledLogin>
-          <div>
-            <label htmlFor="email-input">
-              Epost
-              <StyledInput id="email-input" type="email" />
-            </label>
+          <div style={{ width: '50%' }}>
+            <StyledInputWrapper>
+              <label htmlFor="email-input">
+                Epost
+                <StyledInput id="email-input" type="email" />
+              </label>
+            </StyledInputWrapper>
+            <StyledInputWrapper>
+              <StyledLabel HtmlFor="password-input">
+                Passord
+                <StyledInput id="password-input" type="password" />
+              </StyledLabel>
+            </StyledInputWrapper>
+            <StyledButton onClick={loginAttempt}>Logg inn</StyledButton>
           </div>
-          <StyledInputWrapper>
-            <StyledLabel HtmlFor="password-input">
-              Passord
-              <StyledInput id="password-input" type="password" />
-            </StyledLabel>
-          </StyledInputWrapper>
-          <StyledButton onClick={loginAttempt}>Logg inn</StyledButton>
+          <div
+            style={{
+              width: '50%',
+              borderLeft: 'solid 5px #009688',
+              padding: '30px',
+            }}
+          >
+            <Link to="/register">
+              <StyledButton>Registrer deg</StyledButton>
+            </Link>
+          </div>
         </StyledLogin>
       </StyledMainContent>
     );

@@ -13,8 +13,18 @@ export async function loginRequest(email, pw) {
   });
 }
 
-export async function getArticlesRequest() {
-  return Axios.get(`${url}/articles`);
+export async function registerUserRequest(payload) {
+  return Axios.post(`${url}/user`, payload);
+}
+
+export async function getNonSecretArticlesRequest() {
+  return Axios.get(`${url}/articles/non-secret`);
+}
+
+export async function getAllArticles() {
+  return Axios.get(`${url}/articles/secret`, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
 }
 
 export async function createArticleRequest(dataBody) {

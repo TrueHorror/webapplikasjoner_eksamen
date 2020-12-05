@@ -17,6 +17,8 @@ function Nav() {
   const LoginArea = () => {
     const logoutUser = () => {
       dispatch({ type: 'USER_LOGOUT' });
+      sessionStorage.setItem('token', '');
+      window.location.reload();
     };
     let userType = '';
     if (user.userType === 0) {

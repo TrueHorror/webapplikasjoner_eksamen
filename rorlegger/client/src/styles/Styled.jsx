@@ -278,6 +278,7 @@ export const WorkerCardsContainer = styled.div`
 // Loginpage
 
 export const StyledLogin = styled.div`
+  display: flex;
   margin: 100px;
   label {
     width: 200px;

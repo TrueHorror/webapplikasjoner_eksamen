@@ -8,6 +8,7 @@ import OfficesDetails from '../pages/OfficesDetails';
 import Login from '../pages/Login';
 import CreateArticle from '../pages/CreateArticle';
 import ArticleDetails from '../pages/ArticleDetails';
+import Register from '../pages/Register';
 
 function Routes({ handleOverlay }) {
   return (
@@ -32,6 +33,9 @@ function Routes({ handleOverlay }) {
       </Route>
       <Route path="/login">
         <Login />
+      </Route>
+      <Route path="/register">
+        <Register />
       </Route>
       <Route path="/createarticle">
         <CreateArticle handleOverlay={handleOverlay} />
