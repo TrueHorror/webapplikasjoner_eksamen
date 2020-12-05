@@ -12,7 +12,8 @@ const ArticleSchema = new mongoose.Schema({
     GivenName: {type: String, required: true},
     FamilyName: {type: String, required: true}
   },
-  User: {type: Schema.Types.ObjectId, ref: 'User', required: true}
+  User: {type: Schema.Types.ObjectId, ref: 'User', required: true},
+  Secret: {type: Boolean, required: true}
 })
 
 const Article = mongoose.model('Article', ArticleSchema)

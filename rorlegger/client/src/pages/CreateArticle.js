@@ -1,7 +1,9 @@
+/* eslint-disable no-plusplus */
 /* eslint-disable no-use-before-define */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   StyledBanner,
   StyledMainContent,
@@ -16,66 +18,66 @@ import {
 } from '../styles/Styled';
 import {
   createArticleRequest,
-  getCategories,
+  getCategoriesRequest,
   getWriters,
 } from '../utils/apiCalls';
-import { successToaster } from '../utils/global';
+import { successToaster, errorToaster } from '../utils/global';
 
 function CreateArticle({ handleOverlay }) {
+  const history = useHistory();
   const [formData, setFormData] = useState({
     Title: '',
     Ingress: '',
     SubHeader: '',
     Content: '',
   });
-  const [fullName, setFullName] = useState('');
-
   const [categories, setCategories] = useState([]);
   const [categoryOption, setCategoryOption] = useState('');
   const [selectedCategory, setSelectedCategory] = useState();
 
   const [writers, setWriters] = useState([]);
   const [writerOption, setWriterOption] = useState('');
+  const [writerNameArray, serWriterNameArray] = useState();
   const [selectedWriter, setSelectedWriter] = useState();
 
-  const [writerLabelOption, setWriterLabelOption] = useState('');
   const [allData, setAllData] = useState({});
 
   const [secret, setSecret] = useState(false);
 
-  const [emptyInput, setEmptyInput] = useState();
-
   useEffect(() => {
-    getCategories()
+    getCategoriesRequest()
       .then((res) => {
         setCategories(res.data.categories);
       })
       .catch((e) => {
         console.log(e);
-        console.error('Noe gikk galt');
+        errorToaster('Noe gikk galt under henting av kategorier');
       });
   }, []);
+
+  useEffect(() => {
+    console.log(categories);
+  }, [categories]);
 
   useEffect(() => {
     getWriters()
       .then((res) => {
-        setWriters(res.data.writers);
+        setWriters(res.data.Writers);
       })
       .catch((e) => {
         console.log(e);
-        console.error('Noe gikk galt');
+        errorToaster('Noe gikk galt under henting av forfattere');
       });
   }, []);
 
-  useEffect(() => {
-    console.log(writers);
-    console.log(categories);
-  }, [writers, categories]);
-
   const handleCreate = (e) => {
     e.preventDefault();
+    console.log('outside if');
     if (noEmptyInputs(e)) {
+      console.log('inside if');
       updateAllDataValue();
+    } else {
+      errorToaster('Fyll i feltene med røde kanter');
     }
   };
 
@@ -85,10 +87,6 @@ function CreateArticle({ handleOverlay }) {
 
   const updateValue = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const writerLabelSelect = (e) => {
-    setWriterLabelOption(e.target.value);
   };
 
   const openModalForNewCategory = (e) => {
@@ -107,16 +105,21 @@ function CreateArticle({ handleOverlay }) {
   // Writer ---------------------------------
 
   const updateWriterOption = (e) => {
-    console.log(e.target.value);
+    const name = e.target.value.split(' ');
+    serWriterNameArray(name);
     setWriterOption(e.target.value);
   };
 
   useEffect(() => {
-    if (writerOption) {
+    if (writerNameArray) {
       console.log('Updating selectedWriter');
-      setSelectedWriter({ Writer: writerOption });
+      console.log(writerNameArray);
+      setSelectedWriter({
+        GivenName: writerNameArray[0],
+        FamilyName: writerNameArray[1],
+      });
     }
-  }, [writerOption]);
+  }, [writerNameArray]);
 
   useEffect(() => {
     if (selectedWriter) {
@@ -135,7 +138,7 @@ function CreateArticle({ handleOverlay }) {
     if (categoryOption) {
       console.log('Updating selectedCategory');
       const addCategoryOptionToSelectedCategory = () => {
-        setSelectedCategory({ Name: categoryOption });
+        setSelectedCategory(categoryOption);
       };
       addCategoryOptionToSelectedCategory();
     }
@@ -163,6 +166,8 @@ function CreateArticle({ handleOverlay }) {
         try {
           await createArticleRequest(dataBody);
           successToaster('Artikkel laget');
+
+          history.push('/articles');
         } catch (e) {
           if (e.response && e.response.status === 400) {
             console.log(`Noe gikk galt med lagringen${e.response}`);
@@ -180,19 +185,42 @@ function CreateArticle({ handleOverlay }) {
     const inputs = e.target.querySelectorAll('input');
     const textarea = e.target.querySelectorAll('textarea');
     const selects = e.target.querySelectorAll('select');
-    console.log(inputs);
-    console.log(textarea);
-    console.log(selects);
-
+    let errors = 0;
     inputs.forEach((i) => {
       if (i.value === '') {
         i.style.border = '2px solid #ff0000';
+        errors++;
       } else {
         i.style.border = '1px solid #469fb9';
       }
     });
 
-    return false;
+    textarea.forEach((t) => {
+      if (t.value === '') {
+        t.style.border = '2px solid #ff0000';
+        errors++;
+      } else {
+        t.style.border = '1px solid #469fb9';
+      }
+    });
+
+    selects.forEach((s) => {
+      if (
+        s.value === 'Velg en kategori...' ||
+        s.value === 'Velg forfatter...'
+      ) {
+        s.style.border = '2px solid #ff0000';
+        errors++;
+      } else {
+        s.style.border = '1px solid #469fb9';
+      }
+    });
+
+    if (errors > 0) {
+      return false;
+    }
+
+    return true;
   };
 
   return (
@@ -241,22 +269,14 @@ function CreateArticle({ handleOverlay }) {
             >
               <option>Velg en kategori...</option>
               {categories.map((cat) => (
-                <option label={cat.Name} value={cat.Name} />
+                <option label={cat.Name} value={cat._id} />
               ))}
             </StyledSelect>
             <StyledButton onClick={openModalForNewCategory}>
               Ny Kategori
             </StyledButton>
           </div>
-          <StyledSelect
-            readOnly
-            name="WriterLabel"
-            value={writerLabelOption}
-            onChange={writerLabelSelect}
-            placeholder="Forfatter tittel..."
-          >
-            <option>Admin: </option>
-          </StyledSelect>
+
           <StyledLabel htmlFor="Writer">Forfatter:</StyledLabel>
           <StyledSelect
             readOnly
@@ -266,12 +286,13 @@ function CreateArticle({ handleOverlay }) {
             placeholder="Forfatter..."
           >
             <option>Velg forfatter...</option>
-            {writers.map((w) => (
-              <option
-                label={`${w.GivenName} ${w.FamilyName}`}
-                value={`${w.GivenName} ${w.FamilyName}`}
-              />
-            ))}
+            {writers &&
+              writers.map((w) => (
+                <option
+                  label={`${w.GivenName} ${w.FamilyName}`}
+                  value={`${w.GivenName} ${w.FamilyName}`}
+                />
+              ))}
           </StyledSelect>
           <label style={{ float: 'right' }} htmlFor="secret">
             Hemmelig artikkel?

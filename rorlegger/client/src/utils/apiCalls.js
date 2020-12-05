@@ -27,10 +27,10 @@ export async function createArticleRequest(dataBody) {
   });
 }
 
-export async function getCategories() {
+export async function getCategoriesRequest() {
   return Axios.get(`${url}/category`);
 }
 
-export async function createCategory(data) {
+export async function createCategoryRequest(data) {
   return Axios.post(`${url}/category`, data);
 }

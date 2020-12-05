@@ -17,29 +17,34 @@ import {
 } from '../styles/Styled';
 
 import { userIsLoggedInAsAdmin } from '../utils/authentication';
-import { getArticlesRequest } from '../utils/apiCalls';
+import { getArticlesRequest, getCategoriesRequest } from '../utils/apiCalls';
+import { errorToaster } from '../utils/global';
 
 function Articles() {
   const articles = useSelector((state) => state.articles);
   const [filteredArticles, setFilteredArticles] = useState([]);
-  // const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [searchString, setSearchString] = useState('');
+  const [chosenCategory, setChosenCategory] = useState('');
   const dispatch = useDispatch();
 
+  const getData = async () => {
+    try {
+      const res = await getArticlesRequest();
+      dispatch({
+        type: 'SAVE_ARTICLES_IN_STORE',
+        articles: res.data.articles,
+      });
+      setFilteredArticles(res.data.articles);
+      const catRes = await getCategoriesRequest();
+      setCategories(Object.assign(catRes.data.categories));
+    } catch (e) {
+      errorToaster('Noe gikk galt under henting av data');
+      console.error(e);
+    }
+  };
+
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const res = await getArticlesRequest();
-        dispatch({
-          type: 'SAVE_ARTICLES_IN_STORE',
-          articles: res.data.articles,
-        });
-        setFilteredArticles(res.data.articles);
-      } catch (e) {
-        console.log(e);
-        console.error('Noe gikk galt');
-      }
-    };
     getData();
   }, []);
 
@@ -61,7 +66,7 @@ function Articles() {
                 {article.Title}
               </Link>
               <StyledArticleListItemContentHeaderCategory>
-                {article.Category.Name}
+                {article.Category ? article.Category.Name : 'Kategori mangler'}
               </StyledArticleListItemContentHeaderCategory>
             </StyledArticleListItemContentHeader>
             <StyledArticleListItemContentText>
@@ -85,17 +90,39 @@ function Articles() {
     return null;
   };
 
-  const searchList = (evt) => {
+  const updateSearchString = (evt) => {
     setSearchString(evt.target.value);
-    const rx = new RegExp(evt.target.value, 'i');
-    const filtered = articles.filter((article) => rx.test(article.Title));
+  };
+
+  const FilterOnCategoryList = () => {
+    if (categories && categories.length > 0) {
+      return categories.map((category) => (
+        <option value={category._id}>{category.Name}</option>
+      ));
+    } else {
+      return null;
+    }
+  };
+
+  const updateChosenCategory = (evt) => {
+    setChosenCategory(evt.target.value);
+  };
+
+  const filterOnSearchAndCategory = () => {
+    const filteredOnCategory = articles.filter(
+      (article) => article.Category._id === chosenCategory
+    );
+    const searchRx = new RegExp(searchString, 'i');
+    const filtered = filteredOnCategory.filter((article) =>
+      searchRx.test(article.Title)
+    );
     setFilteredArticles(filtered);
   };
 
-  // eslint-disable-next-line no-undef
-  /* const FilterOnCategory = categories.map((category) => (
-    <option value={category._id}>{category.Name}</option>
-  )); */
+  useEffect(() => {
+    // eslint-disable-next-line no-use-before-define
+    filterOnSearchAndCategory();
+  }, [chosenCategory, searchString]);
 
   return (
     <section>
@@ -110,11 +137,15 @@ function Articles() {
           <div>
             <StyledInput
               id="search-input"
-              onChange={searchList}
+              onChange={updateSearchString}
               defaultValue={searchString}
               type="text"
               style={{ marginRight: '10px' }}
+              placeholder="søk"
             />
+            <select onChange={updateChosenCategory} value={chosenCategory}>
+              <FilterOnCategoryList />
+            </select>
           </div>
         </StyledButtonGroupArticles>
         <div>
