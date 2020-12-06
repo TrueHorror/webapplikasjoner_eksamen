@@ -60,7 +60,7 @@ exports.createArticle = async function (data) {
   let body = data.body
   try {
     if (WriterService.writerExists(body.Writer.GivenName, body.Writer.FamilyName)){
-      return await Article.create({
+      return Article.create({
         Title: body.Title,
         Ingress: body.Ingress,
         Content: body.Content,
@@ -80,5 +80,29 @@ exports.createArticle = async function (data) {
   } catch (e) {
     console.error(e)
     throw Error('Could not create article')
+  }
+}
+
+exports.saveImageToArticle = async function (articleId, imageId) {
+  try {
+    return Article.findByIdAndUpdate(
+      {
+        _id: articleId
+      },
+      {
+        Image: imageId
+      }
+    )
+  } catch (e) {
+    throw Error('Couldn\'t save image');
+  }
+}
+
+exports.getImageIdByArticleId = async function (articleId) {
+  try {
+    let article = await Article.findOne({_id: articleId})
+    return article.Image;
+  } catch (e) {
+    throw Error('Could not get imageId')
   }
 }
