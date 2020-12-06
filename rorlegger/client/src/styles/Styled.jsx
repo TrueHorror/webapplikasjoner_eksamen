@@ -219,7 +219,7 @@ export const StyledButton = styled.button`
   margin: 10px auto;
   padding: 15px;
   margin-right: 10px;
-  border: none;
+  border: 2px #469fb9 solid;
 `;
 
 export const StyledDetailsButton = styled(Link)`
@@ -285,7 +285,10 @@ export const StyledLogin = styled.div`
   }
 `;
 
-export const StyledLabel = styled.label``;
+export const StyledLabel = styled.label`
+  display: inline-block;
+  width: 100px;
+`;
 
 export const StyledInput = styled.input`
   border: 1px solid #469fb9;
@@ -401,6 +404,13 @@ export const StyledLinkButton = styled(Link)`
   border-radius: 0px;
   padding: 20px;
   font-weight: 600;
+`;
+
+export const StyledPaginateButton = styled(StyledButton)`
+  padding: 5px;
+  &.active {
+    background: bisque;
+  }
 `;
 
 // Overlay Styling
