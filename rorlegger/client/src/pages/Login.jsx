@@ -26,16 +26,12 @@ function Login() {
         <StyledLogin>
           <div style={{ width: '50%' }}>
             <StyledInputWrapper>
-              <label htmlFor="email-input">
-                Epost
-                <StyledInput id="email-input" type="email" />
-              </label>
+              <StyledLabel htmlFor="email-input">Epost</StyledLabel>
+              <StyledInput id="email-input" type="email" />
             </StyledInputWrapper>
             <StyledInputWrapper>
-              <StyledLabel HtmlFor="password-input">
-                Passord
-                <StyledInput id="password-input" type="password" />
-              </StyledLabel>
+              <StyledLabel HtmlFor="password-input">Passord</StyledLabel>
+              <StyledInput id="password-input" type="password" />
             </StyledInputWrapper>
             <StyledButton onClick={loginAttempt}>Logg inn</StyledButton>
           </div>
@@ -47,7 +43,9 @@ function Login() {
             }}
           >
             <Link to="/register">
-              <StyledButton>Registrer deg</StyledButton>
+              <StyledButton style={{ marginRight: '6vw' }}>
+                Registrer deg
+              </StyledButton>
             </Link>
           </div>
         </StyledLogin>
