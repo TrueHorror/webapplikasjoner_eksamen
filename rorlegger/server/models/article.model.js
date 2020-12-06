@@ -13,7 +13,8 @@ const ArticleSchema = new mongoose.Schema({
     FamilyName: {type: String, required: true}
   },
   User: {type: Schema.Types.ObjectId, ref: 'User', required: true},
-  Secret: {type: Boolean, required: true}
+  Secret: {type: Boolean, required: true},
+  Image: {type: String, required: false}
 })
 
 const Article = mongoose.model('Article', ArticleSchema)
