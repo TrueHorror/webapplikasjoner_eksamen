@@ -54,3 +54,8 @@ export function checkTokenInStorage() {
     setToken(jwt);
   }
 }
+
+export function userLogout() {
+  sessionStorage.setItem('token', '');
+  Store.dispatch('USER_LOGOUT');
+}

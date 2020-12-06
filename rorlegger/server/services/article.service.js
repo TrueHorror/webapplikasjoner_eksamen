@@ -59,10 +59,6 @@ exports.getNonSecretArticles = async function (){
 exports.createArticle = async function (data) {
   let body = data.body
   try {
-    //TODO Test this (admin access only)
-    if (data.user.userType !== 0){
-      throw 'Only admins can create articles'
-    }
     if (WriterService.writerExists(body.Writer.GivenName, body.Writer.FamilyName)){
       return await Article.create({
         Title: body.Title,
