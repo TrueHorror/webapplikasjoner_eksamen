@@ -1,23 +1,21 @@
 /* eslint-disable import/no-cycle */
 import { NavLink } from 'react-router-dom';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   StyledNav,
   NavMenu,
   NavMenuItem,
   StyledNavLink,
 } from '../styles/Styled.jsx';
-import { userIsLoggedIn } from '../utils/authentication';
+import { userIsLoggedIn, userLogout } from '../utils/authentication';
 
 function Nav() {
   const user = useSelector((state) => state.loggedInUser);
-  const dispatch = useDispatch();
 
   const LoginArea = () => {
     const logoutUser = () => {
-      dispatch({ type: 'USER_LOGOUT' });
-      sessionStorage.setItem('token', '');
+      userLogout();
       window.location.reload();
     };
     let userType = '';

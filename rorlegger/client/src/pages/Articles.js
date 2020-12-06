@@ -25,13 +25,12 @@ import {
   getCategoriesRequest,
   getAllArticles,
 } from '../utils/apiCalls';
-import { errorToaster } from '../utils/global';
+import { commonErrorHandler, errorToaster } from '../utils/global';
 
 function Articles() {
   const articles = useSelector((state) => state.articles);
   const [filteredArticles, setFilteredArticles] = useState([]);
   const [paginatedArticles, setPaginatedArticles] = useState([]);
-  // eslint-disable-next-line no-unused-vars
   const [currentPage, setCurrentPage] = useState(0);
   const [categories, setCategories] = useState([]);
   const [searchString, setSearchString] = useState('');
@@ -61,9 +60,10 @@ function Articles() {
       // eslint-disable-next-line no-use-before-define
       updatePaginationButtons();
     } catch (e) {
-      // TODO Lage common errorhandler
-      errorToaster('Noe gikk galt under henting av data');
-      console.error(e);
+      if (!commonErrorHandler(e)) {
+        errorToaster('Noe gikk galt under henting av data');
+        console.error(e);
+      }
     }
   };
 

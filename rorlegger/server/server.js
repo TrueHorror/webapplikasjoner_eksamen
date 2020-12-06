@@ -23,12 +23,11 @@ function createServer(){
     origin: 'http://localhost:3000',
     optionsSuccessStatus: 200
   }))
-  // app.use(jwt({secret, algorithms: ['HS256'] }).unless({path: ['/user', '/articles']}));
-
   app.use('/articles', require('./routes/articles.route.js'))
   app.use('/article', require('./routes/article.route.js'))
   app.use('/writers', require('./routes/writer.route.js'))
   app.use('/category', require('./routes/category.route'))
   app.use('/user', require('./routes/user.route'))
+  app.use('/request', require('./routes/requests.route'))
   return app
 }
