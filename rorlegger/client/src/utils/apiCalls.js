@@ -36,6 +36,12 @@ export async function createArticleRequest(dataBody) {
   });
 }
 
+export async function addImageToArticleRequest(articleId, image) {
+  return Axios.post(`${url}/article/img?articleId=${articleId}`, image, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
+}
+
 export async function getCategoriesRequest() {
   return Axios.get(`${url}/category`);
 }

@@ -7,7 +7,11 @@ import {
   StyledMainContent,
   StyledButton,
 } from '../styles/Styled';
-import { errorToaster, successToaster } from '../utils/global';
+import {
+  commonErrorHandler,
+  errorToaster,
+  successToaster,
+} from '../utils/global';
 import { registerUserRequest } from '../utils/apiCalls';
 
 function Register() {
@@ -30,6 +34,10 @@ function Register() {
       errorToaster('Passord må være 8 tegn!');
       return false;
     }
+    if (!/([0-9])/.test(password)) {
+      errorToaster('Passord må bestå at ett tall!');
+      return false;
+    }
     if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
       return false;
     }
@@ -49,8 +57,10 @@ function Register() {
         await registerUserRequest(payload);
         successToaster('Bruker opprettet');
       } catch (e) {
-        errorToaster('Noe gikk galt under opprettingen av brukerkontoen');
-        console.error(e);
+        if (!commonErrorHandler(e)) {
+          errorToaster('Noe gikk galt under opprettingen av brukerkontoen');
+          console.error(e);
+        }
       }
     }
   };
@@ -68,7 +78,10 @@ function Register() {
           <StyledInput id="familyName" />
           <StyledLabel htmlFor="email">Epost</StyledLabel>
           <StyledInput id="email" />
-          <StyledLabel htmlFor="password">Passord (Minst 8 tegn)</StyledLabel>
+          <StyledLabel style={{ width: '100%' }} htmlFor="password">
+            Passord (Passordet må bestå av minst ett tall og være 8 tegn eller
+            lenger)
+          </StyledLabel>
           <StyledInput id="password" type="password" />
           <StyledLabel htmlFor="repeated-password">Gjenta passord</StyledLabel>
           <StyledInput id="repeated-password" type="password" />

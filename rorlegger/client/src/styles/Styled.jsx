@@ -72,6 +72,12 @@ export const NavMenuItem = styled.li`
   }
 `;
 
+export const StyledUserInfo = styled.div`
+  border: 3px #00bcd4 dotted;
+  margin: 5px;
+  padding: 5px;
+`;
+
 // Banner, Logo
 export const StyledBanner = styled.figure`
   width: 100%;
@@ -81,6 +87,7 @@ export const StyledBanner = styled.figure`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 2em;
 `;
 
 // Main-Content with rom and column. Inspiration from: https://dev.to/drews256/ridiculously-easy-row-and-column-layouts-with-flexbox-1k01 -----------------------------------------------------------------
@@ -411,6 +418,13 @@ export const StyledPaginateButton = styled(StyledButton)`
   &.active {
     background: bisque;
   }
+`;
+
+export const StyledArticleHeader = styled.h1`
+  color: #ecc2c2;
+  /* mix-blend-mode: unset; */
+  font-size: 2em;
+  text-shadow: 1px 5px black;
 `;
 
 // Overlay Styling

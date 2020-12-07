@@ -9,8 +9,9 @@ import {
   StyledLabel,
 } from '../styles/Styled';
 import { createCategoryRequest } from '../utils/apiCalls';
+import { commonErrorHandler } from '../utils/global';
 
-function Modal({ handleOverlay }) {
+function CreateCategoryModal({ handleOverlay }) {
   const [newCategory, setNewCategory] = useState();
   const [isEmpty, setIsEmpty] = useState(false);
 
@@ -28,10 +29,12 @@ function Modal({ handleOverlay }) {
       try {
         await createCategoryRequest(data);
       } catch (e) {
-        if (e.response && e.response.status === 400) {
-          console.log('Noe gik galt');
-        } else {
-          console.log(e);
+        if (!commonErrorHandler(e)) {
+          if (e.response && e.response.status === 400) {
+            console.log('Noe gik galt');
+          } else {
+            console.log(e);
+          }
         }
       }
     }
@@ -56,4 +59,4 @@ function Modal({ handleOverlay }) {
     </StyledOverlay>
   );
 }
-export default Modal;
+export default CreateCategoryModal;

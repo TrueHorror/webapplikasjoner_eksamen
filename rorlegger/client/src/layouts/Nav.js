@@ -7,6 +7,7 @@ import {
   NavMenu,
   NavMenuItem,
   StyledNavLink,
+  StyledUserInfo,
 } from '../styles/Styled.jsx';
 import { userIsLoggedIn, userLogout } from '../utils/authentication';
 
@@ -33,7 +34,7 @@ function Nav() {
       );
     } else {
       return (
-        <div>
+        <StyledUserInfo>
           <div>
             Logget inn som:{' '}
             <span style={{ fontWeight: '600' }}>{user.givenName}</span> (
@@ -43,7 +44,7 @@ function Nav() {
           <button type="button" onClick={logoutUser}>
             Logg ut
           </button>
-        </div>
+        </StyledUserInfo>
       );
     }
   };
