@@ -41,7 +41,6 @@ let gfs;
 conn.once("open", () => {
   gfs = Grid(conn.db, mongoose.mongo);
   gfs.collection("articleImages");
-  console.log("Connection Successful");
 });
 
 router.get("/", async (req, res) => {
