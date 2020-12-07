@@ -1,6 +1,10 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const hpp = require('hpp');
+const csrf = require('csurf')
+const bodyParser = require('body-parser')
+const cookieParser = require('cookie-parser')
 
 require('dotenv').config({path: __dirname + '/.env'})
 
@@ -16,10 +20,13 @@ mongoose
 
 function createServer(){
   const app = express()
+  app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(cookieParser())
+  app.use(hpp())
   app.use(express.json())
   app.use(cors({
     origin: process.env.ORIGIN,
-    optionsSuccessStatus: 200
+    optionsSuccessStatus: 200,
   }))
   app.use('/articles', require('./routes/articles.route.js'))
   app.use('/article/img', require('./routes/articleImages.route'))
