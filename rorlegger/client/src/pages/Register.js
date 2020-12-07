@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   StyledBanner,
   StyledForm,
@@ -15,6 +16,7 @@ import {
 import { registerUserRequest } from '../utils/apiCalls';
 
 function Register() {
+  const history = useHistory();
   const validate = () => {
     const givenName = document.querySelector('#givenName').value;
     const familyName = document.querySelector('#familyName').value;
@@ -56,6 +58,7 @@ function Register() {
       try {
         await registerUserRequest(payload);
         successToaster('Bruker opprettet');
+        history.push('/login');
       } catch (e) {
         if (!commonErrorHandler(e)) {
           errorToaster('Noe gikk galt under opprettingen av brukerkontoen');
