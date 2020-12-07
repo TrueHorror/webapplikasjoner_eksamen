@@ -49,3 +49,7 @@ export async function getCategoriesRequest() {
 export async function createCategoryRequest(data) {
   return Axios.post(`${url}/category`, data);
 }
+
+export async function sendEmailRequest(data) {
+  return Axios.post(`${url}/request`, data);
+}

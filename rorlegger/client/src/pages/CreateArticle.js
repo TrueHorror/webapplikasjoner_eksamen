@@ -163,7 +163,6 @@ function CreateArticle({ handleOverlay }) {
     console.log(formData);
   }, [formData]);
 
-  // TODO: Se på apicalls med createArticleRequest. 400 error... response [Object object]?
   useEffect(() => {
     if (Object.keys(allData).length > 0) {
       console.log(allData);
