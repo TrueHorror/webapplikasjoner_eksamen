@@ -13,7 +13,11 @@ import {
 } from '../styles/Styled';
 import { loginRequest } from '../utils/apiCalls';
 import { setToken } from '../utils/authentication';
-import { errorToaster, successToaster } from '../utils/global';
+import {
+  commonErrorHandler,
+  errorToaster,
+  successToaster,
+} from '../utils/global';
 
 function Login() {
   const user = useSelector((state) => state.loggedInUser);
@@ -56,6 +60,12 @@ function Login() {
   async function loginAttempt() {
     const email = document.querySelector('#email-input').value;
     const pw = document.querySelector('#password-input').value;
+    // Validation
+    if (!/^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+      errorToaster('Ikke gyldig epost');
+      return false;
+    }
+
     let token;
     try {
       token = await loginRequest(email, pw);
@@ -63,11 +73,13 @@ function Login() {
       setToken(token);
       successToaster('Du er logget inn');
     } catch (e) {
-      if (e.response && e.response.status === 401) {
-        errorToaster('Feil brukernavn/passord');
-        console.log('Feil brukernavn/passord');
-      } else {
-        console.error(e);
+      if (!commonErrorHandler(e)) {
+        if (e.response && e.response.status === 401) {
+          errorToaster('Feil brukernavn/passord');
+          console.log('Feil brukernavn/passord');
+        } else {
+          console.error(e);
+        }
       }
     }
   }

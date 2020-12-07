@@ -55,7 +55,7 @@ export function checkTokenInStorage() {
   }
 }
 
-export function userLogout() {
-  sessionStorage.setItem('token', '');
-  Store.dispatch('USER_LOGOUT');
+export async function userLogout() {
+  await sessionStorage.setItem('token', '');
+  await Store.dispatch('USER_LOGOUT');
 }

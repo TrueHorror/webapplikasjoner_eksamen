@@ -2,7 +2,7 @@
 /* eslint-disable import/no-cycle */
 import { useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Modal from './components/Modal';
+import CreateCategoryModal from './components/CreateCategoryModal';
 import Nav from './layouts/Nav';
 import Routes from './routes/Routes';
 import Footer from './layouts/Footer';
@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        {overlay && <Modal handleOverlay={handleOverlay} />}
+        {overlay && <CreateCategoryModal handleOverlay={handleOverlay} />}
         <StyledHeader>
           <StyledLogo>FG</StyledLogo>
           <Nav />

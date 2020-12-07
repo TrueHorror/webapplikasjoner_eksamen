@@ -21,7 +21,11 @@ import {
   getCategoriesRequest,
   getWriters,
 } from '../utils/apiCalls';
-import { successToaster, errorToaster } from '../utils/global';
+import {
+  successToaster,
+  errorToaster,
+  commonErrorHandler,
+} from '../utils/global';
 
 function CreateArticle({ handleOverlay }) {
   const history = useHistory();
@@ -65,8 +69,10 @@ function CreateArticle({ handleOverlay }) {
         setWriters(res.data.Writers);
       })
       .catch((e) => {
-        console.log(e);
-        errorToaster('Noe gikk galt under henting av forfattere');
+        if (!commonErrorHandler(e)) {
+          console.log(e);
+          errorToaster('Noe gikk galt under henting av forfattere');
+        }
       });
   }, []);
 
@@ -169,10 +175,12 @@ function CreateArticle({ handleOverlay }) {
 
           history.push('/articles');
         } catch (e) {
-          if (e.response && e.response.status === 400) {
-            console.log(`Noe gikk galt med lagringen${e.response}`);
-          } else {
-            console.log(e);
+          if (!commonErrorHandler(e)) {
+            if (e.response && e.response.status === 400) {
+              console.log(`Noe gikk galt med lagringen${e.response}`);
+            } else {
+              console.log(e);
+            }
           }
         }
       };

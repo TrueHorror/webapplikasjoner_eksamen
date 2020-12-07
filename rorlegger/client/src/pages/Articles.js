@@ -79,7 +79,12 @@ function Articles() {
     ) {
       return paginatedArticles[currentPage].map((article) => (
         <StyledArticleListItem key={generateUniqueID()}>
-          <StyledArticleListItemImage />
+          <StyledArticleListItemImage
+            style={{
+              backgroundImage: `url(http://localhost:3001/article/img?articleId=${article._id})`,
+              backgroundSize: 'cover',
+            }}
+          />
           <StyledArticleListItemContent>
             <StyledArticleListItemContentHeader>
               <Link

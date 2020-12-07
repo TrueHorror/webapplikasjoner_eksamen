@@ -10,9 +10,11 @@ import {
   StyledMainContent,
   StyledRedButton,
   StyledAdminButtons,
+  StyledArticleHeader,
 } from '../styles/Styled';
 import { getNonSecretArticlesRequest } from '../utils/apiCalls';
-import { errorToaster } from '../utils/global';
+import { commonErrorHandler, errorToaster } from '../utils/global';
+import UploadImageToArticleModal from '../components/UploadImageToArticleModal';
 
 function ArticleDetails() {
   // eslint-disable-next-line no-unused-vars
@@ -20,6 +22,7 @@ function ArticleDetails() {
   const articles = useSelector((state) => state.articles);
   const user = useSelector((state) => state.loggedInUser);
   const [article, setArticle] = useState({});
+  const [showImageUploadModal, setShowImageUploadModal] = useState(false);
 
   useEffect(async () => {
     let foundArticle;
@@ -32,7 +35,9 @@ function ArticleDetails() {
           tempArticles.data.articles.find((oneArticle) => oneArticle._id === id)
         );
       } catch (e) {
-        errorToaster('Artikkel ikke funnet');
+        if (!commonErrorHandler(e)) {
+          errorToaster('Artikkel ikke funnet');
+        }
       }
     }
     if (foundArticle) {
@@ -67,22 +72,52 @@ function ArticleDetails() {
     );
   };
 
+  const showUploadImageModal = () => {
+    setShowImageUploadModal(true);
+  };
+
+  const closeModal = () => {
+    setShowImageUploadModal(false);
+  };
+
   const AdminButtons = () => {
     if (user.userType === 0 && article.Created) {
       return (
         <StyledAdminButtons>
           <StyledRedButton>SLETT</StyledRedButton>
           <StyledGreenButton>REDIGER</StyledGreenButton>
+          <StyledGreenButton onClick={showUploadImageModal}>
+            LAST OPP BILDE
+          </StyledGreenButton>
         </StyledAdminButtons>
       );
     }
     return null;
   };
 
+  if (!article) {
+    console.log(article);
+    return (
+      <section>
+        <StyledBanner>
+          <StyledArticleHeader style={{ fontSize: '20px' }}>
+            Artikkel ikke funnet (Prøv å logge deg inn på nytt)
+          </StyledArticleHeader>
+        </StyledBanner>
+      </section>
+    );
+  }
+
   return (
     <section>
-      <StyledBanner>
-        <h1>{article.Title}</h1>
+      <StyledBanner
+        style={{
+          backgroundImage: `url(http://localhost:3001/article/img?articleId=${id})`,
+          backgroundPosition: 'center',
+          backgroundRepeat: 'space',
+        }}
+      >
+        <StyledArticleHeader>{article.Title}</StyledArticleHeader>
       </StyledBanner>
       <StyledMainContent>
         <StyledArticleContentDetails>
@@ -93,6 +128,9 @@ function ArticleDetails() {
         <h2>{article.SubHeader}</h2>
         <p>{article.Content}</p>
         <AdminButtons />
+        {showImageUploadModal ? (
+          <UploadImageToArticleModal articleId={id} closeModal={closeModal} />
+        ) : null}
       </StyledMainContent>
     </section>
   );
