@@ -76,8 +76,9 @@ function Login() {
       if (!commonErrorHandler(e)) {
         if (e.response && e.response.status === 401) {
           errorToaster('Feil brukernavn/passord');
-          console.log('Feil brukernavn/passord');
+          console.error('Feil brukernavn/passord');
         } else {
+          errorToaster('Innloggingen gikk galt, kontakt admin!');
           console.error(e);
         }
       }
