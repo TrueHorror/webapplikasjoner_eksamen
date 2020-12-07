@@ -8,11 +8,16 @@ const ArticleController = require('../controllers/article.controller')
 const Grid = require('gridfs-stream')
 const mongoose = require("mongoose");
 const ObjectID = require("mongodb").ObjectId;
+const jwt = require('express-jwt')
+const secret = process.env.JWT_SECRET;
 
 const storage = new GridFsStorage({
   url: mongoURI, file: (req, file) => {
     return new Promise((resolve, reject) => {
       crypto.randomBytes(16, (err, buf) => {
+        if (!/(\.png|jpg)$/.test(file.originalname)) {
+          return reject(err);
+        }
         if (err) {
           return reject(err);
         }
@@ -56,11 +61,12 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/",
+  jwt({ secret, algorithms: ['HS256'] }),
   upload.single("image"),
-  ArticleController.addImageToArticle,
-  (req, res, err) => {
+  async (req, res, err) => {
+    await ArticleController.addImageToArticle(req, res)
   if (err){
-    throw err;
+    res.status(400).send()
   }
   res.status(201).send();
 });
