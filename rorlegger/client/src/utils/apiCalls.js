@@ -47,5 +47,7 @@ export async function getCategoriesRequest() {
 }
 
 export async function createCategoryRequest(data) {
-  return Axios.post(`${url}/category`, data);
+  return Axios.post(`${url}/category`, data, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
 }

@@ -17,6 +17,7 @@
     "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "babel-plugin-styled-components": "^1.11.1",
+    "cross-env": "^7.0.3",
     "dotenv": "^8.2.0",
     "eslint": "^7.11.0",
     "eslint-config-airbnb": "^18.2.0",
@@ -48,6 +49,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --setupFiles ./src/setupTests.js",
+    "test:coverage": "cross-env CI=true npm test -- --env=jsdom --coverage",
     "eject": "react-scripts eject",
     "lint": "eslint ./src",
     "fix": "eslint --fix ./src"

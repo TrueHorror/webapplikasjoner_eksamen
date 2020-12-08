@@ -2,9 +2,11 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const hpp = require('hpp');
-const csrf = require('csurf')
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser')
+const helmet = require('helmet');
+const mongoSanitize = require('express-mongo-sanitize');
+const rateLimit = require("express-rate-limit");
 
 require('dotenv').config({path: __dirname + '/.env'})
 
@@ -19,8 +21,17 @@ mongoose
   
 
 function createServer(){
+
+  const limiter = rateLimit({
+    windowMs: 15 * 60 * 1000, // 15 minutes
+    max: 100 // limit each IP to 100 requests per windowMs
+  });
+
   const app = express()
+  app.use(limiter);
+  app.use(helmet())
   app.use(bodyParser.urlencoded({ extended: false }));
+  app.use(mongoSanitize());
   app.use(cookieParser())
   app.use(hpp())
   app.use(express.json())
