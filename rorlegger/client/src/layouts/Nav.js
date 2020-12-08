@@ -9,15 +9,16 @@ import {
   StyledNavLink,
   StyledUserInfo,
 } from '../styles/Styled.jsx';
-import { userIsLoggedIn, userLogout } from '../utils/authentication';
+import Auth from '../utils/authentication';
 
 function Nav() {
   const user = useSelector((state) => state.loggedInUser);
 
   const LoginArea = () => {
     const logoutUser = () => {
-      userLogout();
-      window.location.reload();
+      Auth.userLogout().then(() => {
+        window.location.reload();
+      });
     };
     let userType = '';
     if (user.userType === 0) {
@@ -26,7 +27,7 @@ function Nav() {
       userType = 'bruker';
     }
 
-    if (!userIsLoggedIn()) {
+    if (!Auth.userIsLoggedIn()) {
       return (
         <NavLink exact to="/login">
           Logg inn

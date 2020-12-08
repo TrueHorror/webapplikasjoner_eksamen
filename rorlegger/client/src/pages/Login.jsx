@@ -2,7 +2,7 @@
 /* eslint-disable no-use-before-define */
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {
   StyledMainContent,
   StyledLogin,
@@ -12,7 +12,7 @@ import {
   StyledLabel,
 } from '../styles/Styled';
 import { loginRequest } from '../utils/apiCalls';
-import { setToken } from '../utils/authentication';
+import Auth from '../utils/authentication';
 import {
   commonErrorHandler,
   errorToaster,
@@ -21,6 +21,7 @@ import {
 
 function Login() {
   const user = useSelector((state) => state.loggedInUser);
+  const history = useHistory();
 
   if (user.email) {
     return <p>Du er logget inn</p>;
@@ -65,13 +66,18 @@ function Login() {
       errorToaster('Ikke gyldig epost');
       return false;
     }
+    if (pw.length < 8) {
+      errorToaster('Passord må være 8 tegn!');
+      return false;
+    }
 
     let token;
     try {
       token = await loginRequest(email, pw);
       token = token.data.Token;
-      setToken(token);
+      Auth.setToken(token);
       successToaster('Du er logget inn');
+      history.push('/articles');
     } catch (e) {
       if (!commonErrorHandler(e)) {
         if (e.response && e.response.status === 401) {

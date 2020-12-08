@@ -7,7 +7,6 @@ import {
   StyledOverlay,
   StyledOverlayForm,
 } from '../styles/Styled';
-// eslint-disable-next-line no-unused-vars
 import { addImageToArticleRequest } from '../utils/apiCalls';
 import {
   commonErrorHandler,

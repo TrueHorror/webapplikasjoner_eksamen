@@ -6,9 +6,9 @@ import theStore from './utils/store';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { checkTokenInStorage } from './utils/authentication';
+import Auth from './utils/authentication';
 
-checkTokenInStorage();
+Auth.checkTokenInStorage();
 
 ReactDOM.render(
   <React.StrictMode>

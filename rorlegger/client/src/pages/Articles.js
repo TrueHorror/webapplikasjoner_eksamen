@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { generateUniqueID } from 'web-vitals/dist/lib/generateUniqueID';
 import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 import {
@@ -19,7 +18,7 @@ import {
   StyledPaginateButton,
 } from '../styles/Styled';
 
-import { userIsLoggedInAsAdmin } from '../utils/authentication';
+import Auth from '../utils/authentication';
 import {
   getNonSecretArticlesRequest,
   getCategoriesRequest,
@@ -77,8 +76,8 @@ function Articles() {
       paginatedArticles[currentPage] &&
       paginatedArticles[currentPage].length > 0
     ) {
-      return paginatedArticles[currentPage].map((article) => (
-        <StyledArticleListItem key={generateUniqueID()}>
+      return paginatedArticles[currentPage].map((article, index) => (
+        <StyledArticleListItem key={index}>
           <StyledArticleListItemImage
             style={{
               backgroundImage: `url(http://localhost:3001/article/img?articleId=${article._id})`,
@@ -112,7 +111,7 @@ function Articles() {
   };
 
   const NewArticleButton = () => {
-    if (userIsLoggedInAsAdmin()) {
+    if (Auth.userIsLoggedInAsAdmin()) {
       return (
         <StyledLinkButton to={{ pathname: `/createarticle` }}>
           NY ARTIKKEL
@@ -128,8 +127,14 @@ function Articles() {
 
   const CategoryList = () => {
     if (categories && categories.length > 0) {
-      return categories.map((category) => (
-        <option value={category._id}>{category.Name}</option>
+      return categories.map((category, index) => (
+        <option
+          date-testid={`category-input-${index}`}
+          value={category._id}
+          key={index}
+        >
+          {category.Name}
+        </option>
       ));
     } else {
       return null;
@@ -143,14 +148,22 @@ function Articles() {
   const filterOnSearchAndCategory = () => {
     let filteredOnCategory = articles;
     if (chosenCategory) {
-      filteredOnCategory = articles.filter(
-        (article) => article.Category._id === chosenCategory
-      );
+      filteredOnCategory = articles.filter((article) => {
+        if (article.Category) {
+          return article.Category._id === chosenCategory;
+        }
+        return false;
+      });
     }
     const searchRx = new RegExp(searchString, 'i');
-    const filtered = filteredOnCategory.filter((article) =>
-      searchRx.test(article.Title)
-    );
+    let filtered;
+    if (filteredOnCategory) {
+      filtered = filteredOnCategory.filter((article) =>
+        searchRx.test(article.Title)
+      );
+    } else {
+      filtered = [];
+    }
     setFilteredArticles(filtered);
   };
 
@@ -213,17 +226,27 @@ function Articles() {
     if (paginatedArticles) {
       return (
         <div id="pagination-buttons">
-          <StyledPaginateButton type="button" onClick={previousPage}>
+          <StyledPaginateButton
+            data-testid="previous-page-button"
+            type="button"
+            onClick={previousPage}
+          >
             <ArrowLeftIcon />
           </StyledPaginateButton>
-          <StyledPaginateButton type="button" onClick={nextPage}>
+          <StyledPaginateButton
+            data-testid="next-page-button"
+            type="button"
+            onClick={nextPage}
+          >
             <ArrowRightIcon />
           </StyledPaginateButton>
           {paginatedArticles.map((article, index) => (
             <StyledPaginateButton
-              class="pagination-button"
+              className="pagination-button"
               type="button"
               value={index}
+              key={index}
+              data-testid={`pag-button-${index}`}
               onClick={changePage}
             >
               {index + 1}
@@ -247,13 +270,18 @@ function Articles() {
           <div>
             <StyledInput
               id="search-input"
+              data-testid="search-input"
               onChange={updateSearchString}
               defaultValue={searchString}
               type="text"
               style={{ marginRight: '10px' }}
               placeholder="søk"
             />
-            <select onChange={updateChosenCategory} value={chosenCategory}>
+            <select
+              onChange={updateChosenCategory}
+              value={chosenCategory}
+              data-testid="category-select"
+            >
               <CategoryList />
             </select>
           </div>

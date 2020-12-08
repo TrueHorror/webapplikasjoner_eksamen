@@ -172,7 +172,6 @@ function CreateArticle({ handleOverlay }) {
         try {
           await createArticleRequest(dataBody);
           successToaster('Artikkel laget');
-
           history.push('/articles');
         } catch (e) {
           if (!commonErrorHandler(e)) {
