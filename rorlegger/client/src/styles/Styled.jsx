@@ -374,6 +374,8 @@ export const StyledArticleContentDetailsWriter = styled.div``;
 
 export const StyledArticleContentDetailsDate = styled.div``;
 
+export const StyledArticleContentDetailsReadTime = styled.div``;
+
 export const StyledRedButton = styled(StyledButton)`
   color: white;
   background-color: #e91e63;

@@ -60,6 +60,57 @@ exports.getViewsForAllArticles = async () => {
 
 exports.getViewsPerUser = async () => {
   try {
-
+    return Tracking.aggregate([
+      {
+        '$group': {
+          '_id': '$User',
+          'Count': {
+            '$sum': 1
+          }
+        }
+      }, {
+        '$lookup': {
+          'from': 'users',
+          'localField': '_id',
+          'foreignField': '_id',
+          'as': 'User'
+        }
+      }, {
+        '$addFields': {
+          'User': {
+            '$arrayElemAt': [
+              '$User', 0
+            ]
+          }
+        }
+      }, {
+        '$set': {
+          'UserType': '$User.UserType',
+          'GivenName': '$User.GivenName',
+          'FamilyName': '$User.FamilyName',
+          'Email': '$User.Email'
+        }
+      }, {
+        '$unset': [
+          'User'
+        ]
+      }
+    ])
+  } catch (e) {
+    throw Error('Could not aggregate')
   }
+}
+
+exports.getTopTenArticles = async () => {
+  try {
+    let views = await exports.getViewsForAllArticles()
+    let sorted = views.sort((a, b) => {
+      return b.Count - a.Count
+    })
+    let chopped = sorted.slice(0, 10)
+    return chopped
+  } catch (e) {
+    throw Error('Could not aggregate')
+  }
+
 }

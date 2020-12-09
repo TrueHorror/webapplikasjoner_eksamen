@@ -56,10 +56,11 @@ exports.getNonSecretArticles = async function (){
 
 exports.getNonSecretArticle = async (id) => {
   try {
-    return await Article.findOne({
+    let article = await Article.findOne({
       _id: id,
       Secret: false
     })
+    return addReadTime(article)
   } catch (e) {
     console.error(e)
     throw Error('Article not found')
@@ -68,8 +69,8 @@ exports.getNonSecretArticle = async (id) => {
 
 exports.getSecretArticle = async (id) => {
   try {
-    console.log(id)
-    return await Article.findOne({'_id': id})
+    let article = await Article.findOne({'_id': id})
+    return addReadTime(article)
   } catch (e) {
     console.error(e)
     throw Error('Article not found')
@@ -126,4 +127,17 @@ exports.getImageIdByArticleId = async function (articleId) {
   } catch (e) {
     throw Error('Could not get imageId')
   }
+}
+
+const addReadTime = (article) => {
+  let readTime = article.Content.split(' ').length/ 200
+  if (readTime <= 1){
+    readTime = 1
+  } else {
+    readTime = Math.floor(readTime)
+  }
+  console.log(article.Content.split(' ').length)
+  let convertedToJson = article.toObject()
+  convertedToJson.ReadTime = readTime
+  return convertedToJson
 }
