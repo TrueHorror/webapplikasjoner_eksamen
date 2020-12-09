@@ -27,6 +27,7 @@ function Login() {
     return <p>Du er logget inn</p>;
   } else {
     return (
+      // TODO: Fikse at dette er en form, kalle loginatempt ved enter kanppetrykk (Submit)
       <StyledMainContent>
         <StyledLogin>
           <div style={{ width: '50%' }}>

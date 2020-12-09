@@ -128,6 +128,16 @@ export const StyledMainSections = styled.section`
   align-items: center;
 `;
 
+export const StyledTopTenLink = styled(Link)`
+  font-size: 20px;
+  text-decoration: none;
+  color: black;
+  :hover {
+    cursor: pointer;
+    border: 1px solid #469fb9;
+  }
+`;
+
 export const StyledOfficesList = styled.ol``;
 
 export const StyledListItems = styled.li`
