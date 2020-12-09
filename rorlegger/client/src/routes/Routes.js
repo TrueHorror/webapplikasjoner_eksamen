@@ -9,6 +9,7 @@ import Login from '../pages/Login';
 import CreateArticle from '../pages/CreateArticle';
 import ArticleDetails from '../pages/ArticleDetails';
 import Register from '../pages/Register';
+import Tracking from '../pages/Tracking';
 
 function Routes({ handleOverlay }) {
   return (
@@ -30,6 +31,9 @@ function Routes({ handleOverlay }) {
       </Route>
       <Route path="/contact">
         <Contact />
+      </Route>
+      <Route path="/tracking">
+        <Tracking />
       </Route>
       <Route path="/login">
         <Login />
