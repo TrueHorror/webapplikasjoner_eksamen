@@ -72,6 +72,13 @@ function Nav() {
           <StyledNavLink exact to="/contact">
             Kontakt
           </StyledNavLink>
+          {Auth.userIsLoggedInAsAdmin() ? (
+            <StyledNavLink exact to="/tracking">
+              User Tracking
+            </StyledNavLink>
+          ) : (
+            <span />
+          )}
           <LoginArea />
         </NavMenuItem>
       </NavMenu>

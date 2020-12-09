@@ -12,7 +12,7 @@ import {
 } from '../styles/Styled';
 import { sendEmailRequest } from '../utils/apiCalls.js';
 import { successToaster, commonErrorHandler } from '../utils/global';
-import { userIsLoggedIn } from '../utils/authentication';
+import Auth from '../utils/authentication';
 
 function Contact() {
   const user = useSelector((state) => state.loggedInUser);
@@ -77,7 +77,7 @@ function Contact() {
           id="contactMessage"
           onSubmit={handleSubmit}
         >
-          {userIsLoggedIn() ? (
+          {Auth.userIsLoggedIn() ? (
             <>
               <StyledLabel htmlFor="GivenName">Fornavn:</StyledLabel>
               <StyledInput name="GivenName" value={user.givenName} disabled />
