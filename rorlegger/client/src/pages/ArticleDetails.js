@@ -5,6 +5,7 @@ import {
   StyledArticleContentDetails,
   StyledArticleContentDetailsDate,
   StyledArticleContentDetailsWriter,
+  StyledArticleContentDetailsReadTime,
   StyledBanner,
   StyledGreenButton,
   StyledMainContent,
@@ -58,6 +59,20 @@ function ArticleDetails() {
     return null;
   };
 
+  const ReadTime = () => {
+    let text;
+    if (article.ReadTime === 1) {
+      text = 'Ett minutt lesetid';
+    } else {
+      text = `${article.ReadTime} minutters lesetid`;
+    }
+    return (
+      <StyledArticleContentDetailsReadTime>
+        {text}
+      </StyledArticleContentDetailsReadTime>
+    );
+  };
+
   const WriterField = () => {
     if (article.Writer && article.Writer.GivenName) {
       return (
@@ -97,7 +112,6 @@ function ArticleDetails() {
   };
 
   if (!article) {
-    console.log(article);
     return (
       <section>
         <StyledBanner>
@@ -123,6 +137,7 @@ function ArticleDetails() {
       <StyledMainContent>
         <StyledArticleContentDetails>
           <WriterField />
+          <ReadTime />
           <DateField />
         </StyledArticleContentDetails>
         <p>{article.Ingress}</p>
