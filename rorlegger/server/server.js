@@ -24,7 +24,7 @@ function createServer(){
 
   const limiter = rateLimit({
     windowMs: 15 * 60 * 1000, // 15 minutes
-    max: 100 // limit each IP to 100 requests per windowMs
+    max: 200 // limit each IP to 100 requests per windowMs
   });
 
   const app = express()
@@ -46,5 +46,6 @@ function createServer(){
   app.use('/category', require('./routes/category.route'))
   app.use('/user', require('./routes/user.route'))
   app.use('/request', require('./routes/requests.route'))
+  app.use('/tracking', require('./routes/tracking.route'))
   return app
 }

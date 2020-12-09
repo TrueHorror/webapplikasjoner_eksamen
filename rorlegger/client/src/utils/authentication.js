@@ -58,7 +58,7 @@ const Auth = {
 
   userLogout: async () => {
     await sessionStorage.setItem('token', '');
-    await Store.dispatch('USER_LOGOUT');
+    Store.dispatch({ type: 'USER_LOGOUT' });
   },
 };
 

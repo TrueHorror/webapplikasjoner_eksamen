@@ -57,3 +57,11 @@ exports.getUserType = function (userType){
   }
 }
 
+exports.changeUserPrivileges = async (data) => {
+  let newPrivilege = data.UserType;
+  let userId = data.UserId;
+  return User.findByIdAndUpdate(userId, {
+    UserType: newPrivilege
+  })
+}
+

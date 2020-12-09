@@ -17,6 +17,16 @@ export async function registerUserRequest(payload) {
   return Axios.post(`${url}/user`, payload);
 }
 
+export function getNonSecretArticleRequest(id) {
+  return Axios.get(`${url}/article/non-secret?id=${id}`);
+}
+
+export function getSecretArticleRequest(id) {
+  return Axios.get(`${url}/article/secret?id=${id}`, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
+}
+
 export async function getNonSecretArticlesRequest() {
   return Axios.get(`${url}/articles/non-secret`);
 }

@@ -70,4 +70,14 @@ const validateLogin = (data) => {
   return '';
 }
 
+exports.changeUserPrivileges = async (req, res, next) => {
+  try {
+    await UserService.changeUserPrivileges(req.body);
+    return res.status(200).json({message: 'Privilege updated'})
+  } catch (e) {
+    console.error(e)
+    return res.status(400).json({message: 'Privilege not updated'})
+  }
+}
+
 

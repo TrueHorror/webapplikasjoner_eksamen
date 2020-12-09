@@ -1,7 +1,6 @@
-var Article = require('../models/article.model')
-var Writer = require('../models/writer.model')
-var WriterService = require('../services/writer.service')
-const CategoryService = require("../services/category.service.js");
+const Article = require('../models/article.model')
+const WriterService = require('../services/writer.service')
+const ObjectID = require('mongoose').ObjectID;
 
 
 exports.getAllArticles = async function (){
@@ -52,6 +51,28 @@ exports.getNonSecretArticles = async function (){
   } catch (e) {
     console.error(e)
     throw Error('Could not find any articles')
+  }
+}
+
+exports.getNonSecretArticle = async (id) => {
+  try {
+    return await Article.findOne({
+      _id: id,
+      Secret: false
+    })
+  } catch (e) {
+    console.error(e)
+    throw Error('Article not found')
+  }
+}
+
+exports.getSecretArticle = async (id) => {
+  try {
+    console.log(id)
+    return await Article.findOne({'_id': id})
+  } catch (e) {
+    console.error(e)
+    throw Error('Article not found')
   }
 }
 

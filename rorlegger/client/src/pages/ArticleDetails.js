@@ -12,36 +12,37 @@ import {
   StyledAdminButtons,
   StyledArticleHeader,
 } from '../styles/Styled';
-import { getNonSecretArticlesRequest } from '../utils/apiCalls';
+import {
+  getNonSecretArticleRequest,
+  getSecretArticleRequest,
+} from '../utils/apiCalls';
 import { commonErrorHandler, errorToaster } from '../utils/global';
 import UploadImageToArticleModal from '../components/UploadImageToArticleModal';
 
 function ArticleDetails() {
-  // eslint-disable-next-line no-unused-vars
   const { id } = useParams();
-  const articles = useSelector((state) => state.articles);
   const user = useSelector((state) => state.loggedInUser);
   const [article, setArticle] = useState({});
   const [showImageUploadModal, setShowImageUploadModal] = useState(false);
 
   useEffect(async () => {
-    let foundArticle;
-    if (articles.length > 0) {
-      foundArticle = articles.find((oneArticle) => oneArticle._id === id);
-    } else {
-      try {
-        const tempArticles = await getNonSecretArticlesRequest();
-        setArticle(
-          tempArticles.data.articles.find((oneArticle) => oneArticle._id === id)
-        );
-      } catch (e) {
-        if (!commonErrorHandler(e)) {
+    let res;
+    try {
+      if (user.email) {
+        res = await getSecretArticleRequest(id);
+      } else {
+        res = await getNonSecretArticleRequest(id);
+      }
+      console.log(res);
+      setArticle(res.data.article);
+    } catch (e) {
+      if (!commonErrorHandler(e)) {
+        if (e.response && e.response.status === 404) {
           errorToaster('Artikkel ikke funnet');
+        } else {
+          errorToaster('Noe gikk galt');
         }
       }
-    }
-    if (foundArticle) {
-      setArticle(foundArticle);
     }
   }, []);
 
