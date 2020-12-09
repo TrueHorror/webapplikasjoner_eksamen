@@ -19,5 +19,17 @@ router.get('/articles/views',
   }
   )
 
+router.get('/articles/top-ten',
+  jwt({ secret, algorithms: ['HS256'] }),
+  (req, res) => {
+    return TrackingController.getTopTenArticles(req, res)
+  }
+)
+
+router.get('/users/views',
+  jwt({ secret, algorithms: ['HS256'] }),
+  (req, res) => {
+  return TrackingController.getViewsPerUser(req, res)
+  })
 module.exports = router
 
