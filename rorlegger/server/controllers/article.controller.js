@@ -1,4 +1,5 @@
 const ArticleService = require('../services/article.service')
+const TrackingService = require('../services/tracking.service')
 
 exports.createArticle = async function (req, res, next) {
   try {
@@ -34,6 +35,35 @@ exports.getAllArticles = async function (req, res, next) {
     return res.status(200).json({message: "Successfully retrieved articles", articles})
   } catch (e) {
     return res.status(400).json({message: e.message})
+  }
+}
+
+exports.getSecretArticle = async (req, res, next) => {
+  try {
+    let article = await ArticleService.getSecretArticle(req.query.id)
+    await TrackingService.newEntry({
+      type: 'article',
+      id: req.query.id,
+      userId: req.user.sub
+    })
+    if (!article){
+      return res.status(404).json({message: "Article not found"})
+    }
+    return res.status(200).json({message: "Successfully retrieved article", article})
+  } catch (e) {
+    return res.status(404).json({message: "Could not find article"})
+  }
+}
+
+exports.getNonSecretArticle = async (req, res, next) => {
+  try {
+    let article = await ArticleService.getNonSecretArticle(req.query.id)
+    if (!article){
+      return res.status(404).json({message: "Article not found"})
+    }
+    return res.status(200).json({message: "Successfully retrieved article", article})
+  } catch (e) {
+    return res.status(400).json({message: "Could not get article"})
   }
 }
 

@@ -11,6 +11,23 @@
 2: ansatt<br>
 3: partner
 
+## Brukere
+<b>Admin:</b><br>
+admin@admin.no<br>
+pw: drossap123
+
+<b>Bruker:</b><br>
+john@johnsen.no<br>
+pw: drossap123
+
+## Testing av klient
+Klient er testet ved hjelp av rammeverkene Jest og Testing-library.
+Gå til ```/client``` og kjør ```npm test```. For coverage kjør ```npm run test:coverage```
+
+## Testing av server
+
+
+
 ## Sikkerhet
 Følgende tiltak er implementert mtp. sikkerhet:
 ### Inputvalidering
@@ -23,6 +40,10 @@ Express Mongoose Sanitize er installert
 ### DoS-angrep
 Express Rate Limit er installert for å forhindre
 at en IP kan sende for mange forespørsler i et kort tidsrom.
+
+## API
+APIet er dokumentert her:
+https://documenter.getpostman.com/view/9823323/TVmPBHM1#d606b8cc-ace9-4ba2-ac43-e05778e7764a
 
 ## Copy/Paste
 Her kommer litt informasjon om kode vi har funnet på nettet.

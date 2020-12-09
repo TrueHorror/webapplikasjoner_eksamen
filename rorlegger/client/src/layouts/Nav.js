@@ -23,8 +23,14 @@ function Nav() {
     let userType = '';
     if (user.userType === 0) {
       userType = 'admin';
-    } else {
+    } else if (user.userType === 1) {
       userType = 'bruker';
+    } else if (user.userType === 2) {
+      userType = 'ansatt';
+    } else if (user.userType === 3) {
+      userType = 'partner';
+    } else {
+      userType = 'ukjent';
     }
 
     if (!Auth.userIsLoggedIn()) {
