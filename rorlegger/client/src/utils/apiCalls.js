@@ -61,3 +61,7 @@ export async function createCategoryRequest(data) {
     headers: { Authorization: `Bearer ${getToken()}` },
   });
 }
+
+export async function sendEmailRequest(data) {
+  return Axios.post(`${url}/request`, data);
+}
