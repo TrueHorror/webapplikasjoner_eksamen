@@ -114,7 +114,10 @@ function Offices() {
                           <StyledListText>{off.adress}</StyledListText>
                           <StyledListText>{off.phone}</StyledListText>
                           <StyledListText>{off.email}</StyledListText>
-                          <StyledDetailsButton name={off.name}>
+                          <StyledDetailsButton
+                            name={off.name}
+                            to={`/office/${off.id}`}
+                          >
                             Detaljer
                           </StyledDetailsButton>
                         </StyledListItems>

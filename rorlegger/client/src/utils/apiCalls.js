@@ -65,3 +65,21 @@ export async function createCategoryRequest(data) {
 export async function sendEmailRequest(data) {
   return Axios.post(`${url}/request`, data);
 }
+
+export async function getTrackingDataViews() {
+  return Axios.get(`${url}/tracking/articles/views`, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
+}
+
+export async function getTrackingDataTopTen() {
+  return Axios.get(`${url}/tracking/articles/top-ten`, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
+}
+
+export async function getTrackingDataViewsPerUser() {
+  return Axios.get(`${url}/tracking/users/views`, {
+    headers: { Authorization: `Bearer ${getToken()}` },
+  });
+}
