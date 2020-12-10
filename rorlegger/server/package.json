@@ -6,7 +6,7 @@
   "scripts": {
     "test": "cross-env MODE=test && jest --runInBand --forceExit --watchAll",
     "test:coverage": "cross-env MODE=test && jest --runInBand --forceExit --watchAll --coverage",
-    "start": "nodemon app.js"
+    "start": "nodemon server.js"
   },
   "author": "Trond and Fredrik",
   "license": "ISC",

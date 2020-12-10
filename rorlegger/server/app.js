@@ -51,9 +51,4 @@ function initServer(app){
   app.use('/request', require('./routes/requests.route'))
   app.use('/tracking', require('./routes/tracking.route'))
 }
-
-
-
-
-
 module.exports = app
