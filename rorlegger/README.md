@@ -46,7 +46,10 @@ APIet er dokumentert her:
 https://documenter.getpostman.com/view/9823323/TVmPBHM1#d606b8cc-ace9-4ba2-ac43-e05778e7764a
 
 ## Copy/Paste
-Her kommer litt informasjon om kode vi har funnet på nettet.
+Her kommer litt informasjon om kode vi har funnet på nettet eller fra tidliger obliger.
+1. /Styled.jsx - Linje 4, 93, 444
+2. /App.js - Linje 12
+
 ### Bilder til/fra database 
 Til hjelp da vi skulle hente/sende bilder brukte vi kode fra denne tutorialen: https://medium.com/swlh/uploading-images-to-mongodb-with-multer-ed345f2922ba
 ```/server/routes/articleImages.route.js```
