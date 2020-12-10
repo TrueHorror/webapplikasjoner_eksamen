@@ -28,12 +28,19 @@ nettleseren og gå inn på siden
 #### Eksempelbrukere det går an å logge inn med
 <b>Admin:</b><br>
 admin@admin.no<br>
-pw: drossap123
+passord: drossap123
 
 <b>Bruker:</b><br>
 john@johnsen.no<br>
-pw: drossap123
+passord: drossap123
 
+<b>Ansatt: </b><br>
+john@johnsen.no<br>
+passord: drossap123
+
+<b>Partner: </b><br>
+geir@borresen.no<br>
+passord: drossap123
 ## Testing av klient
 Klient er testet ved hjelp av rammeverkene Jest og Testing-library.
 Gå til ```/client``` og kjør ```npm test```. For coverage kjør ```npm run test:coverage```
