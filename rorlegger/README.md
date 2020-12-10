@@ -17,7 +17,8 @@ Kjør disse kommandoene:
 Når begge disse kjører kan du åpne 
 nettleseren og gå inn på siden 
 ``http://localhost:3000``
-
+## Eksempledata
+Vi har en JSON fil, ```/client/src/tempOffices.json```, med kontorer som er eksempel på informasjon om dem. Denne dataen er statisk
 ## Roller og brukerkontoer
 <b>Vi benytter koder for å tilgangsstyring:</b><br>
 0: admin<br>
