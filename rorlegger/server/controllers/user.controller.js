@@ -6,7 +6,8 @@ exports.createUser = async function (req, res, next) {
     return res.status(400).json({message: validation})
   }
   try {
-    await UserService.createUser(req.body)
+    let resFromDb = await UserService.createUser(req.body)
+    console.log(resFromDb)
     return res.status(201).json({message: "User created"})
   } catch (e) {
     console.error(e)

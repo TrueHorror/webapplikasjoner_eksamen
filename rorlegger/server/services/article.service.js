@@ -60,7 +60,11 @@ exports.getNonSecretArticle = async (id) => {
       _id: id,
       Secret: false
     })
-    return addReadTime(article)
+    if (!article){
+      return article
+    } else {
+      return addReadTime(article)
+    }
   } catch (e) {
     console.error(e)
     throw Error('Article not found')
@@ -70,7 +74,11 @@ exports.getNonSecretArticle = async (id) => {
 exports.getSecretArticle = async (id) => {
   try {
     let article = await Article.findOne({'_id': id})
-    return addReadTime(article)
+    if (!article){
+      return article
+    } else {
+      return addReadTime(article)
+    }
   } catch (e) {
     console.error(e)
     throw Error('Article not found')
@@ -136,7 +144,6 @@ const addReadTime = (article) => {
   } else {
     readTime = Math.floor(readTime)
   }
-  console.log(article.Content.split(' ').length)
   let convertedToJson = article.toObject()
   convertedToJson.ReadTime = readTime
   return convertedToJson

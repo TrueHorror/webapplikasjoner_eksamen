@@ -7,14 +7,13 @@ exports.createUser = async function (data) {
   try {
     bcrypt.genSalt(saltRounds, async function(err, salt) {
       bcrypt.hash(data.Password, salt, async function(err, hash) {
-        let res = await User.create({
+        return User.create({
           GivenName: data.GivenName,
           FamilyName: data.FamilyName,
           UserType: 1,
           Email: data.Email,
           Password: hash
         })
-        return res
       });
     });
   } catch (e) {
@@ -34,6 +33,7 @@ exports.loginUser = async function (data) {
       return null
     }
   } catch (e) {
+    console.error(e)
     throw Error('Login failed')
   }
 }

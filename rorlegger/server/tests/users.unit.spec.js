@@ -40,7 +40,7 @@ describe("loginUser()", () => {
     expect(await UserService.loginUser(loginDetails)).toThrow('Login failed')
   })*/
 })
-
+/*
 describe("createUser()", () => {
   it ("should create a user", async () => {
     let userDetails = {
@@ -54,4 +54,4 @@ describe("createUser()", () => {
     expect(await UserService.createUser(userDetails)).toBeUndefined()
     expect(User.create).toBeUndefined()
   })
-})
+})*/

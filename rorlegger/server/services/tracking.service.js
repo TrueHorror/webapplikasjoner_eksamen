@@ -2,7 +2,6 @@ const Tracking = require('../models/tracking.model')
 
 exports.newEntry = async (data) => {
   try {
-    console.log(data.id);
     return Tracking.create({
 
       Time: new Date(),
