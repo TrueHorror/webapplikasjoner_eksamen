@@ -66,6 +66,9 @@ at en IP kan sende for mange forespørsler i et kort tidsrom.
 APIet er dokumentert her:
 https://documenter.getpostman.com/view/9823323/TVmPBHM1#d606b8cc-ace9-4ba2-ac43-e05778e7764a
 
+## Email til brukere som sender forespørsel
+Som standard blir mailene som skulle blitt sendt ut til brukerne sendt til mailtrap. Dersom sensor ønsker å teste at den sender virkelig mail, kan vedkommende forandre miljøvariabelen i .env filen fra EMAIL_TESTING=true til EMAIL_TESTING=false.
+
 ## Copy/Paste
 Her kommer litt informasjon om kode vi har funnet på nettet eller fra tidliger obliger.
 1. /Styled.jsx - Linje 4, 93, 444
